@@ -1,0 +1,36 @@
+{
+  "name": "cms-spotlight-2025",
+  "version": "1.0.0",
+  "description": "Spotlight CMS Static Site Generator (2025 version)",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "preview": "node --env-file=.env --env-file=.env.preview index.js",
+    "staging": "node --env-file=.env --env-file=.env.staging index.js",
+    "start": "node --env-file=.env --env-file=.env.dev ./publican.config.js"
+  },
+  "homepage": "https://github.com/tezosweb/cms-spotlight-2025#readme",
+  "bugs": {
+    "url": "https://github.com/tezosweb/cms-spotlight-2025/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tezosweb/cms-spotlight-2025.git"
+  },
+  "license": "MIT",
+  "author": "Craig Buckler",
+  "keywords": [
+    "Tezos",
+    "Spotlight",
+    "CMS",
+    "SSG",
+    "static site"
+  ],
+  "dependencies": {
+    "esbuild": "0.25.11",
+    "publican": "0.11.0"
+  },
+  "devDependencies": {
+    "livelocalhost": "1.2.4"
+  }
+}
