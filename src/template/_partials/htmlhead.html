@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="${ tacs.config.language }" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>${ data.title || tacs.config.title }${ data?.pagination?.pageTotal > 1 ? ` (page ${ tacs.fn.format.number( data.pagination.pageCurrent1 ) } of ${ tacs.fn.format.number( data.pagination.pageTotal ) })` : ''}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Content Security Policy -->
+<meta http-equiv="Content-Security-Policy" content="
+default-src 'none';
+img-src 'self' data: i.ytimg.com${ tacs.config.GTMID ? ' https://*.googletagmanager.com https://*.google-analytics.com' : ''} ${ tacs.config.cspImage };
+font-src 'self';
+style-src 'self';
+script-src 'self' 'sha256-OM0hjhCFzKhe37rKuW7480xLoDyRIzyLMKCvzoH6tGU='${ tacs.config.GTMID ? ' https://*.googletagmanager.com' : ''}${ tacs.config.PostHog.key ? ' https://*.posthog.com/' : ''};
+worker-src 'self' blob: data:;
+connect-src 'self'${ tacs.config.GTMID ? ' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com' : ''}${ tacs.config.PostHog.key ? ' https://*.posthog.com/' : ''};
+manifest-src 'self';
+frame-src www.youtube-nocookie.com;
+">
+
+<!-- assets -->
+<link rel="stylesheet" href="${ tacs.root }css/main.css?${ tacs.config.version }">
+<script type="module" src="${ tacs.root }js/main.js?${ tacs.config.version }"></script>
+
+<!-- meta -->
+<meta name="description" content="${ data.description || tacs.config.description }">
+<meta name="author" content="${ data.author || tacs.config.author }">
+<link rel="canonical" href="${ tacs.config.domain }${ data.link }">
+
+<!-- search -->
+<meta name="robots" content="${ tacs.config.isProd ? 'index,follow' : 'noindex,nofollow' }">
+
+<!-- sitemap -->
+<link rel="sitemap" type="application/xml" href="${ tacs.config.domain }${ tacs.root }sitemap.xml">
+<link rel="sitemap" type="text/plain" href="${ tacs.config.domain }${ tacs.root }sitemap.txt">
+
+<!-- feeds -->
+<link rel="alternate" type="application/rss+xml" title="${ tacs.config.title }" href="${ tacs.config.domain }${ tacs.root }feed.xml">
+<link rel="alternate" type="application/atom+xml" title="${ tacs.config.title }" href="${ tacs.config.domain }${ tacs.root }feed.xml">
+
+<!-- application -->
+<meta name="application-name" content="${ tacs.config.title }">
+<meta name="theme-color" content="${ tacs.config.themeColor }">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="${ tacs.config.title }">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<!-- theme -->
+<link rel="apple-touch-icon" sizes="180x180" href="${ tacs.root }favicon180.png">
+<link rel="icon" type="image/svg+xml" href="${ tacs.root }favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="${ tacs.root }favicon032.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${ tacs.root }favicon016.png">
+<link rel="manifest" href="${ tacs.root }site.webmanifest">
+
+<!-- social media -->
+<meta property="og:site_name" content="Publican.dev">
+<meta property="og:url" content="${ tacs.config.domain }${ data.link }">
+<meta property="og:title" content="${ data.title || tacs.config.title }">
+<meta property="og:description" content="${ data.description || tacs.config.description }">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="${ tacs.config.language }">
+<meta property="og:image" content="${ tacs.config.domain }${ tacs.root }${ data.hero || 'favicon512.png' }">
+${ data.isDirIndex || data.isTagIndex ? '' : `
+<meta property="article:published_time" content="${ tacs.fn.format.dateISO( data.date ) }">
+<meta property="article:modified_time" content="${ tacs.fn.format.dateISO( data.modified || data.date ) }">
+` }
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@craigbuckler">
+
+</head>
+<body${ data.status ? ` class="${ data.status }"` : '' }>
