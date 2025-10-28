@@ -21,12 +21,13 @@ const
   src = env('SOURCE_DIR', './src/'),
   dest = env('BUILD_DIR', './build/'),
   devPort = env('SERVE_PORT', 8000),
+  domain = isDev ? `http://localhost:${ devPort }` : env('SITE_DOMAIN'),
 
   // site configuration
   imgRoot = env('CMS_ASSET', '/media/'),
-  imgTrans = env('SITE_IMAGE_TRANS', ''),
-  imgThumbTrans = env('SITE_THUMB_TRANS', ''),
-  imgSocialTrans = env('SITE_SOCIAL_TRANS', ''),
+  imgTrans = env('CMS_IMAGE_TRANS', ''),
+  imgThumbTrans = env('CMS_THUMB_TRANS', ''),
+  imgSocialTrans = env('CMS_SOCIAL_TRANS', ''),
   orgRoot = env('SITE_ORGROOT', 'author'),
   postsMax = cmsData.settings?.posts_maximum || 12,
   relatedMax = cmsData.settings?.related_maximum || 6,
@@ -70,7 +71,14 @@ publican.config.groupPages = {
   size: postsMax,
   index: 'monthly',
   template: env('TEMPLATE_GROUP', templateDefault),
-  list: {}
+  list: {
+    'article': {
+      root: ''
+    },
+    'featured': {
+      root: 'featured'
+    }
+  }
 };
 
 // create groups from organizations
@@ -81,6 +89,9 @@ organization.forEach(org => {
   };
 
 });
+
+// pass-through files
+publican.config.passThrough.add({ from: './src/media/', to: './media/' });
 
 // processRenderStart hook: change title, descriptions, etc.
 publican.config.processRenderStart.add( fnHooks.renderstartData );
@@ -107,6 +118,11 @@ cmsData.post.forEach(p => {
   videoActive = videoActive || (pType === 'video' && postType?.[ p.post_type ]);
   podcastActive = podcastActive || (pType === 'podcast' && postType?.[ p.post_type ]);
 
+  const groups = [];
+  if (p.index_post) groups.push( 'article' );
+  if (p.feature_post) groups.push( 'featured ');
+  if (p.author) groups.push( normalize(p.author) );
+
   // normalize tags
   const tags = [
     postTopic?.[ p.topic_spotlight ]?.slug || '',   // Spotlight topic
@@ -126,6 +142,7 @@ cmsData.post.forEach(p => {
 
   // organization
   const org = p.organization && organization[ p.organization ];
+  if (org) groups.push( org.name );
 
   // images
   const
@@ -153,6 +170,9 @@ date: ${ p.date }
 menu: false
 priority: 1
 index: monthly
+url: ${ domain + publican.config.root + p.slug }
+topic: ${ postTopic?.[ p.topic_spotlight ]?.name || '' }
+topicSlug: ${ postTopic?.[ p.topic_spotlight ]?.slug || '' }
 ${ p.feature_post ? 'featured: true' : '' }
 ${ imageHero ? `imageHero: ${ imageHero }` : ''}
 ${ imageThumb ? `imageThumb: ${ imageThumb }` : ''}
@@ -164,7 +184,8 @@ ${ p.author ? `author: ${ p.author }` : '' }
 ${ p.source ? `source: ${ p.source }` : '' }
 ${ p.source_url ? `sourceURL: ${ p.source_url }` : '' }
 ${ tags.length ? `tags: ${ tags.join(',') }` : '' }
-${ org ? `groups: ${ org.name }\ngroupLink: ${ orgRoot }/${ org.slug }/` : '' }
+${ groups ? `groups: ${ groups.join(',') }` : ''}
+${ org ? `groupLink: ${ orgRoot }/${ org.slug }/\norganization: ${ org.name }` : '' }
 ---
 ${ content }
 `
@@ -172,12 +193,14 @@ ${ content }
 });
 
 // update topics if videos or podcasts exist
-if (videoActive) postTopic.push(videoActive);
-if (podcastActive) postTopic.push(podcastActive);
+if (videoActive) postTopic.push({ ...videoActive, show: true });
+if (podcastActive) postTopic.push({ ...podcastActive, show: true });
 
 // replacement strings
 publican.config.replace = new Map([
   [ '__/', publican.config.root ],
+  [ ' style="text-align:left"', '' ],
+  [ ' style="text-align:start"', '' ],
   [ ' style="text-align:end"', ' class="right"' ],
   [ ' style="text-align:right"', ' class="right"' ],
   [ ' style="text-align:center"', ' class="center"' ],
@@ -185,7 +208,7 @@ publican.config.replace = new Map([
   [ '</table>', '</table></div>' ],
   [ /<p>(<img.+?>)<\/p>/gim, '$1' ],                          // <p> around <img>
   [ /<p>(<youtube-lite.+?><\/youtube-lite>)<\/p>/gim, '$1' ], // <p> around <youtube-lite>
-  [ /<img\s+(.+?)>/gism, '<img $1 loading="lazy">' ],         // <img> lazy loading
+  [ /<img(\b(?![^>]*\bloading\s*=)[^>]*)>/gism, '<img $1 loading="lazy">' ],  // <img> lazy loading
   [ /<\/blockquote>\s*<blockquote>/gi, '' ],                  // multiple <blockquote>
 ]);
 
@@ -200,11 +223,13 @@ tacs.config.isDev = isDev;
 tacs.config.isProd = isProd;
 tacs.config.version = pkg.version;
 tacs.config.language = env('SITE_LANGUAGE', 'en');
-tacs.config.domain = isDev ? `http://localhost:${ devPort }` : env('SITE_DOMAIN');
+tacs.config.domain = domain;
 tacs.config.title = env('SITE_TITLE');
 tacs.config.description = env('SITE_DESCRIPTION');
 tacs.config.author = env('SITE_AUTHOR');
-tacs.config.wordCountShow = env('SITE_WORDCOUNTSHOW', 0);
+tacs.config.social = env('SITE_SOCIAL');
+tacs.config.wordsPerMinute = env('SITE_WORDS_MINUTE', 200) || 200;
+tacs.config.themeColor = env('SITE_THEME_COLOR', '#fff');
 tacs.config.cspImage = isProd ? '' : imgRoot;
 
 // CMS globals
@@ -214,8 +239,10 @@ tacs.config.relatedMax = relatedMax;
 tacs.config.canonical = cmsData.settings?.canonical_url;
 tacs.config.footerLinks = cmsData.settings?.footer_links || [];
 tacs.config.socialLinks = cmsData.settings?.social_links || [];
-tacs.config.organization = organization;
+tacs.config.tagRoot = publican.config.root + publican.config.tagPages.root + '/';
 tacs.config.topic = postTopic;
+tacs.config.orgRoot = publican.config.root + orgRoot + '/';
+tacs.config.organization = organization;
 tacs.config.GTMID = isProd && (cmsData.settings?.Google_Tag_Manager_ID || '').trim();
 tacs.config.PostHog = {
   key: isProd && (cmsData.settings?.PostHog_API_Key || '').trim(),

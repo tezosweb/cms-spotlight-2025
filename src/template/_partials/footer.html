@@ -1,0 +1,20 @@
+<footer><div>
+
+  <p class="logo"><a href="${ tacs.root }" title="${ tacs.config.title }">
+
+    <svg class="tezos" width="32"><use xlink:href="#tezoslogo"></use></svg>
+    <svg class="spotlight" width="140"><use xlink:href="#spotlightlogo"></use></svg>
+
+  </a></p>
+
+  <ul class="social">
+    ${ tacs.config.socialLinks.map(s => `<li><a href="${ s.url }">${ s.link }</a></li>`) }
+  </ul>
+
+  <p class="copyright">&copy; Copyright ${ tacs.config.title } ${ tacs.fn.format.dateYear() }</p>
+
+  <ul class="links">
+    ${ tacs.config.footerLinks.map(f => `<li><a href="${ f.url }">${ f.link }</a></li>`) }
+  </ul>
+
+</div></footer>

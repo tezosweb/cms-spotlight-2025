@@ -25,7 +25,7 @@ frame-src www.youtube-nocookie.com;
 <!-- meta -->
 <meta name="description" content="${ data.description || tacs.config.description }">
 <meta name="author" content="${ data.author || tacs.config.author }">
-<link rel="canonical" href="${ tacs.config.domain }${ data.link }">
+<link rel="canonical" href="${ tacs.config.canonical && data.source_url ? data.source_url : `${ tacs.config.domain }${ data.link }` }">
 
 <!-- search -->
 <meta name="robots" content="${ tacs.config.isProd ? 'index,follow' : 'noindex,nofollow' }">
@@ -47,27 +47,26 @@ frame-src www.youtube-nocookie.com;
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-<!-- theme -->
-<link rel="apple-touch-icon" sizes="180x180" href="${ tacs.root }favicon180.png">
-<link rel="icon" type="image/svg+xml" href="${ tacs.root }favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="${ tacs.root }favicon032.png">
-<link rel="icon" type="image/png" sizes="16x16" href="${ tacs.root }favicon016.png">
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="${ tacs.root }media/favicon/favicon180.png">
+<link rel="icon" type="image/svg+xml" href="${ tacs.root }media/favicon/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="${ tacs.root }media/favicon/favicon.png">
 <link rel="manifest" href="${ tacs.root }site.webmanifest">
 
 <!-- social media -->
-<meta property="og:site_name" content="Publican.dev">
+<meta property="og:site_name" content="${ tacs.config.title }">
 <meta property="og:url" content="${ tacs.config.domain }${ data.link }">
 <meta property="og:title" content="${ data.title || tacs.config.title }">
 <meta property="og:description" content="${ data.description || tacs.config.description }">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="${ tacs.config.language }">
-<meta property="og:image" content="${ tacs.config.domain }${ tacs.root }${ data.hero || 'favicon512.png' }">
-${ data.isDirIndex || data.isTagIndex ? '' : `
+<meta property="og:image" content="${ data.imageSocial || `${ tacs.root }media/favicon/favicon512.png` }">
+${ data.status !== 'published' ? '' : `
 <meta property="article:published_time" content="${ tacs.fn.format.dateISO( data.date ) }">
-<meta property="article:modified_time" content="${ tacs.fn.format.dateISO( data.modified || data.date ) }">
 ` }
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@craigbuckler">
+<meta property="twitter:site" content="${ tacs.config.social }">
+<meta property="twitter:creator" content="${ tacs.config.social }">
 
 </head>
-<body${ data.status ? ` class="${ data.status }"` : '' }>
+<body${ data.status && data.status !== 'published' ? ` class="${ data.status }"` : '' }>

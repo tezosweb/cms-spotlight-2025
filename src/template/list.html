@@ -1,0 +1,19 @@
+${ include('_partials/htmlhead.html') }
+
+${ include('_partials/header.html') }
+
+<main>
+
+  ${ data?.pagination &&
+    `<h1 class="pill"><strong>${ data.isTagIndex || data.isGroupIndex }</strong> <span>${ tacs.fn.format.number( data.childPageTotal ) } article${ data.childPageTotal === 1 ? '' : 's'} found</span></h1>`
+  }
+
+  ${ data.content }
+
+  ${ include('_partials/list.html') }
+
+</main>
+
+${ include('_partials/footer.html') }
+
+${ include('_partials/htmlfoot.html') }

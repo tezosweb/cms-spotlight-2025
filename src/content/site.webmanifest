@@ -1,0 +1,17 @@
+{
+  "lang"              : "${ tacs.config.language }",
+  "dir"               : "ltr",
+  "name"              : "${ tacs.config.title }",
+  "short_name"        : "${ tacs.config.title }",
+  "description"       : "${ tacs.config.description }",
+  "scope"             : "${ tacs.root }",
+  "start_url"         : "${ tacs.root }",
+  "display"           : "minimal-ui",
+  "orientation"       : "any",
+  "theme_color"       : "${ tacs.config.themeColor }",
+  "background_color"  : "${ tacs.config.themeColor }",
+  "icons": [
+    { "src": "${ tacs.config.domain }${ tacs.root }media/favicon/favicon192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "${ tacs.config.domain }${ tacs.root }media/favicon/favicon512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}

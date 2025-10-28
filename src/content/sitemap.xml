@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${ ( toArray(tacs.all) ).filter(p => p.index !== false).map(p => `
+<url>
+  <loc>${ tacs.config.domain }${ p.link }</loc>
+  <lastmod>${ tacs.fn.format.dateISO( p.modified || p.date ) }</lastmod>
+  <changefreq>${ p.index || 'monthly' }</changefreq>
+  <priority>${ p.priority }</priority>
+</url>
+`)
+}
+</urlset>

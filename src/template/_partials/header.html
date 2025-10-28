@@ -1,0 +1,45 @@
+<header><div>
+
+  <p class="logo"><a href="${ tacs.root }" title="${ tacs.config.title }">
+
+    <svg class="tezos" width="32"><use xlink:href="#tezoslogo"></use></svg>
+    <svg class="spotlight" width="140"><use xlink:href="#spotlightlogo"></use></svg>
+
+  </a></p>
+
+  <input id="menu-open" type="checkbox" hidden>
+
+  <label for="menu-open">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="none" viewBox="0 0 17 14" class="open"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="none" viewBox="0 0 14 14" class="close"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/></svg>
+  </label>
+
+  <nav class="menu">
+
+    <details name="navmenu">
+      <summary>Topics <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg></summary>
+
+      <div class="submenu">
+        <ul>
+          ${ tacs.config.topic.filter(t => t?.show).map(t => `<li><a href="${ tacs.config.tagRoot }${ t.slug }/">${ t.name }</a></li>`) }
+        </ul>
+      </div>
+
+    </details>
+
+    <details name="navmenu">
+      <summary>Authors <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg></summary>
+
+      <div class="submenu">
+        <ul>
+          ${ tacs.config.organization.filter(o => o?.show).map(o => `<li><a href="${ tacs.config.orgRoot }${ o.slug }/">${ o.name }</a></li>`) }
+        </ul>
+      </div>
+
+    </details>
+
+    <p><a href="https://tezos.com/">tezos.com</a></p>
+
+  </nav>
+
+</div></header>
