@@ -2,4 +2,4 @@
 template: list.html
 ---
 
-Welcome to Spotlight!
+${ tacs.group.get('featured')?.slice(0,1).map( p => tacs.fn.format.articleLink(p) ) }

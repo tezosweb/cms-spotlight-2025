@@ -9,7 +9,7 @@
 
   <input id="menu-open" type="checkbox" hidden>
 
-  <label for="menu-open">
+  <label for="menu-open" hidden>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="none" viewBox="0 0 17 14" class="open"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/></svg>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="none" viewBox="0 0 14 14" class="close"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/></svg>
   </label>
@@ -21,7 +21,7 @@
 
       <div class="submenu">
         <ul>
-          ${ tacs.config.topic.filter(t => t?.show).map(t => `<li><a href="${ tacs.config.tagRoot }${ t.slug }/">${ t.name }</a></li>`) }
+          ${ tacs.config.topic.filter(t => t?.show && tacs.tag.get(t.slug)?.length).map(t => `<li><a href="${ tacs.config.tagRoot }${ t.slug }/">${ t.name }</a></li>`) }
         </ul>
       </div>
 
@@ -32,7 +32,7 @@
 
       <div class="submenu">
         <ul>
-          ${ tacs.config.organization.filter(o => o?.show).map(o => `<li><a href="${ tacs.config.orgRoot }${ o.slug }/">${ o.name }</a></li>`) }
+          ${ tacs.config.organization.filter(o => o?.show && tacs.group.get(o.name)?.length).map(o => `<li><a href="${ tacs.config.orgRoot }${ o.slug }/">${ o.name }</a></li>`) }
         </ul>
       </div>
 

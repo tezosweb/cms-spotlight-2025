@@ -1,0 +1,11 @@
+${ data?.related?.length ? `
+  <aside class="related">
+    <h2>Related Articles</h2>
+    <nav class="pagelist">${
+      data.related
+        .slice(0, tacs.config.relatedMax)
+        .map(p => tacs.fn.format.articleLink(p, 'h3'))
+        .join('')
+    }</nav>
+  </aside>
+` : ''}

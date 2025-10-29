@@ -93,9 +93,6 @@ organization.forEach(org => {
 // pass-through files
 publican.config.passThrough.add({ from: './src/media/', to: './media/' });
 
-// processRenderStart hook: change title, descriptions, etc.
-publican.config.processRenderStart.add( fnHooks.renderstartData );
-
 // processRenderStart hook: create tacs.tagScore Map
 publican.config.processRenderStart.add( fnHooks.renderstartTagScore );
 
@@ -118,31 +115,38 @@ cmsData.post.forEach(p => {
   videoActive = videoActive || (pType === 'video' && postType?.[ p.post_type ]);
   podcastActive = podcastActive || (pType === 'podcast' && postType?.[ p.post_type ]);
 
-  const groups = [];
-  if (p.index_post) groups.push( 'article' );
-  if (p.feature_post) groups.push( 'featured ');
-  if (p.author) groups.push( normalize(p.author) );
-
-  // normalize tags
-  const tags = [
-    postTopic?.[ p.topic_spotlight ]?.slug || '',   // Spotlight topic
-    pType                                           // post type
-  ]
-    .concat(p.tags || [])                           // tags
-    .map(t => t.replace(/\s+/g, ' ').trim())
-    .filter(t => t &&
-      t.toLowerCase() !== 'tezos' &&
-      t.toLowerCase() !== 'article'
-    )
-    .map(t => {
-      const nt = normalize(t);
-      if (!tagMap.has(nt)) tagMap.set(nt, t);
-      return tagMap.get(nt);
-    });
-
   // organization
   const org = p.organization && organization[ p.organization ];
-  if (org) groups.push( org.name );
+
+  // indexed posts tags/groups
+  let tags = [];
+  const groups = [];
+
+  if (p.index_post) {
+
+    // normalize tags
+    tags = [
+      postTopic?.[ p.topic_spotlight ]?.slug || '',   // Spotlight topic
+      pType                                           // post type
+    ]
+      .concat(p.tags || [])                           // tags
+      .map(t => t.replace(/\s+/g, ' ').trim())
+      .filter(t => t &&
+      t.toLowerCase() !== 'tezos' &&
+      t.toLowerCase() !== 'article'
+      )
+      .map(t => {
+        const nt = normalize(t);
+        if (!tagMap.has(nt)) tagMap.set(nt, t);
+        return tagMap.get(nt);
+      });
+
+    // add to groups
+    groups.push( 'article' );
+    if (p.feature_post) groups.push( 'featured ');
+    if (p.author) groups.push( normalize(p.author) );
+    if (org) groups.push( org.name );
+  }
 
   // images
   const
@@ -150,7 +154,7 @@ cmsData.post.forEach(p => {
     imageSmall = p.image_small?.id || p.image?.id ? `${ imgRoot }${ p.image_small?.id || p.image.id }` : '',
     imageThumb = imageSmall ? `${ imageSmall }${ imgThumbTrans }` : '',
     imageSocial = imageSmall ? `${ imageSmall }${ imgSocialTrans }` : '',
-    imageAlt = p.image?.title || '';
+    imageAlt = (p.image?.title || '').replace(/[^\w|'|-]/g, ' ').replace(/\s+/g, ' ');
 
   // update image and video blocks in content
   const content = ('\n' + (p.content || '') + '\n')
@@ -184,7 +188,7 @@ ${ p.author ? `author: ${ p.author }` : '' }
 ${ p.source ? `source: ${ p.source }` : '' }
 ${ p.source_url ? `sourceURL: ${ p.source_url }` : '' }
 ${ tags.length ? `tags: ${ tags.join(',') }` : '' }
-${ groups ? `groups: ${ groups.join(',') }` : ''}
+${ groups.length ? `groups: ${ groups.join(',') }` : ''}
 ${ org ? `groupLink: ${ orgRoot }/${ org.slug }/\norganization: ${ org.name }` : '' }
 ---
 ${ content }
@@ -206,9 +210,11 @@ publican.config.replace = new Map([
   [ ' style="text-align:center"', ' class="center"' ],
   [ '<table>', '<div class="tablescroll"><table>' ],
   [ '</table>', '</table></div>' ],
-  [ /<p>(<img.+?>)<\/p>/gim, '$1' ],                          // <p> around <img>
-  [ /<p>(<youtube-lite.+?><\/youtube-lite>)<\/p>/gim, '$1' ], // <p> around <youtube-lite>
-  [ /<img(\b(?![^>]*\bloading\s*=)[^>]*)>/gism, '<img $1 loading="lazy">' ],  // <img> lazy loading
+  [ /<p>(<img.+?>)<\/p>/gim, '$1' ],                                        // <p> around <img>
+  [ /<img(\b(?![^>]*\balt\s*=)[^>]*)>/gism, '<img$1 alt="illustration">' ], // <img> alt
+  [ /<img(\b(?![^>]*\bloading\s*=)[^>]*)>/gism, '<img$1 loading="lazy">' ], // <img> lazy loading
+  [ /alt=""/gim, 'alt="decoration"' ],                                      // empty alt
+  [ /<p>(<youtube-lite.+?><\/youtube-lite>)<\/p>/gim, '$1' ],               // <p> around <youtube-lite>
   [ /<\/blockquote>\s*<blockquote>/gi, '' ],                  // multiple <blockquote>
 ]);
 
