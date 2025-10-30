@@ -21,7 +21,8 @@ const
   src = env('SOURCE_DIR', './src/'),
   dest = env('BUILD_DIR', './build/'),
   devPort = env('SERVE_PORT', 8000),
-  domain = isDev ? `http://localhost:${ devPort }` : env('SITE_DOMAIN'),
+  domainProd = env('SITE_DOMAIN'),
+  domain = isDev ? `http://localhost:${ devPort }` : domainProd,
 
   // site configuration
   imgRoot = env('CMS_ASSET', '/media/'),
@@ -107,7 +108,7 @@ let videoActive = false, podcastActive = false;
 const
   reImg = new RegExp('(' + imgRoot.replaceAll('/', '\\/') + '[\\w|-]+)', 'gim'),
   repImg = `$1${ imgTrans }`,
-  repYT = '\n<youtube-lite data-video="$1"></youtube-lite>\n';
+  repYT = '\n<youtube-lite video="$1"></youtube-lite>\n';
 
 cmsData.post.forEach(p => {
 
@@ -242,6 +243,8 @@ tacs.config.cspImage = isProd ? '' : imgRoot;
 tacs.config.keywords = (cmsData.settings.keywords || []).join(', ');
 tacs.config.postsMax = postsMax;
 tacs.config.relatedMax = relatedMax;
+tacs.config.relatedTitle = (cmsData.settings?.related_title || '').trim().replace(/\s+/g, ' ');
+tacs.config.relatedContent = (cmsData.settings?.related_content || '').split('\n').map(p => p.replace(/\s+/g, ' ').trim()).filter(p => p).map(p => `<p>${ p }</p>`).join('\n');
 tacs.config.canonical = cmsData.settings?.canonical_url;
 tacs.config.footerLinks = cmsData.settings?.footer_links || [];
 tacs.config.socialLinks = cmsData.settings?.social_links || [];
@@ -249,11 +252,11 @@ tacs.config.tagRoot = publican.config.root + publican.config.tagPages.root + '/'
 tacs.config.topic = postTopic;
 tacs.config.orgRoot = publican.config.root + orgRoot + '/';
 tacs.config.organization = organization;
-tacs.config.GTMID = isProd && (cmsData.settings?.Google_Tag_Manager_ID || '').trim();
+tacs.config.GTMID = (isProd && (cmsData.settings?.Google_Tag_Manager_ID || '').trim()) || '';
 tacs.config.PostHog = {
-  key: isProd && (cmsData.settings?.PostHog_API_Key || '').trim(),
-  def: isProd && (cmsData.settings?.PostHog_defaults || '').trim(),
-  pro: isProd && (cmsData.settings?.PostHog_profile || '').trim()
+  key: (isProd && (cmsData.settings?.PostHog_API_Key || '').trim()) || '',
+  def: (isProd && (cmsData.settings?.PostHog_defaults || '').trim()) || '',
+  pro: (isProd && (cmsData.settings?.PostHog_profile || '').trim()) || ''
 };
 
 // jsTACS functions
@@ -308,7 +311,7 @@ const buildJS = await esbuild.context({
   define: {
     '__ISDEV__': JSON.stringify(isDev),
     '__VERSION__': `'${ tacs.config.version }'`,
-    '__DOMAIN__': `'${ tacs.config.domain }'`,
+    '__DOMAIN__': `'${ domainProd }'`,
     '__ROOT__': `'${ publican.config.root }'`,
     '__GTMID__': `'${ tacs.config.GTMID }'`,
     '__PHKEY__': `'${ tacs.config.PostHog.key }'`,

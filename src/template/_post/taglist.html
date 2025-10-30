@@ -1,0 +1,5 @@
+<nav class="taglist"><ul>
+  ${ data.featured ? `<li><a href="${ tacs.root }featured/" class="featured">Featured</a></li>` : '' }
+  ${ data.tags.map(t => `<li><a href="${ t.link }">${ t.tag }</a></li>`) }
+  <li><a href="${ tacs.config.tagRoot }">all tags</a></li>
+</ul></nav>

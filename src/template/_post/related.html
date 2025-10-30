@@ -1,6 +1,7 @@
-${ data?.related?.length ? `
+${ data.showRelated && data?.related?.length ? `
   <aside class="related">
-    <h2>Related Articles</h2>
+    <h2>${ tacs.config.relatedTitle || 'Related' }</h2>
+    ${ tacs.config.relatedContent }
     <nav class="pagelist">${
       data.related
         .slice(0, tacs.config.relatedMax)
