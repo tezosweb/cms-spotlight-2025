@@ -1,4 +1,4 @@
-<footer><div>
+<footer>
 
   <p class="logo"><a href="${ tacs.root }" title="${ tacs.config.title }">
 
@@ -7,14 +7,13 @@
 
   </a></p>
 
-  <ul class="social">
+  <ul class="social linklist">
     ${ tacs.config.socialLinks.map(s => `<li><a href="${ s.url }">${ s.link }</a></li>`) }
   </ul>
 
-  <p class="copyright">&copy; Copyright ${ tacs.config.title } ${ tacs.fn.format.dateYear() }</p>
-
-  <ul class="links">
+  <ul class="links linklist">
+    <li>&copy; Copyright ${ tacs.config.title } ${ tacs.fn.format.dateYear() }</li>
     ${ tacs.config.footerLinks.map(f => `<li><a href="${ f.url }">${ f.link }</a></li>`) }
   </ul>
 
-</div></footer>
+</footer>

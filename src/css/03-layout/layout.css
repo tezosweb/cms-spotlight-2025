@@ -1,0 +1,26 @@
+header, main, aside, footer {
+
+  padding-block: 0;
+  padding-inline: var(--pad-page);
+  margin-block: 0;
+  margin-inline: auto;
+
+  > * {
+    max-inline-size: var(--maxwidth-post);
+    padding: 0;
+    margin-inline: auto;
+  }
+
+}
+
+:is(header, footer) > * {
+  max-inline-size: var(--maxwidth-page);
+}
+
+.title {
+  max-inline-size: var(--maxwidth-title);
+}
+
+main > :is(h1, .featured, .pagelist, .pagination), aside.related > * {
+  max-inline-size: var(--maxwidth-index);
+}

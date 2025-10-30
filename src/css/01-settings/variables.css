@@ -1,0 +1,42 @@
+:root {
+
+  --font-head: Eesti, 'Head Fallback';
+  --font-body: Roboto, 'Body Fallback';
+  --font-mono: 'Roboto Mono', 'Mono Fallback';
+
+  --font-weight-head: 400;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+
+  --fsize-0: calc(18em / 16);
+
+  --fsize--1: calc(var(--fsize-0) * 0.7);
+
+  --fsize-1: calc(var(--fsize-0) * 1.5);
+  --fsize-2: calc(var(--fsize-0) * 2);
+  --fsize-3: calc(var(--fsize-0) * 2.5);
+
+  --lh-head: 1.2;
+  --lh-0: calc(28 / 18);
+
+  --pad-page: 24px;
+  --maxwidth-page: 1380px;
+  --maxwidth-index: 1180px;
+  --maxwidth-title: 800px;
+  --maxwidth-post: 680px;
+
+  --color-back0: #121212;
+  --color-back1: #292929;
+  --color-back2: #5c72fa;
+  --color-back3: #6c235e;
+
+  --color-fore0: #fff;
+  --color-fore1: #888;
+
+  --color-link0: var(--color-back2);
+  --color-link0-hover: color-mix(in oklab, var(--color-link0), var(--color-fore0) 50%);
+  --color-link0-trans: color-mix(in oklab, var(--color-link0-hover), transparent 50%);
+
+  --color-grad1: linear-gradient(to right, var(--color-back3), var(--color-back2) ,var(--color-back3));
+
+}

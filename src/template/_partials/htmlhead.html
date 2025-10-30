@@ -21,6 +21,7 @@ frame-src www.youtube-nocookie.com;
 <!-- assets -->
 <link rel="stylesheet" href="${ tacs.root }css/main.css?${ tacs.config.version }">
 <script type="module" src="${ tacs.root }js/main.js?${ tacs.config.version }"></script>
+${ data.imageHero ? `<link rel="preload" href="${ data.imageHero }" as="image">` : '' }
 
 <!-- meta -->
 <meta name="description" content="${ data.description || tacs.config.description }">

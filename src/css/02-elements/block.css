@@ -1,0 +1,55 @@
+/* main block elements */
+body {
+  font-family: var(--font-body);
+  font-size: var(--fsize-0);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--lh-0);
+  min-block-size: 100vh;
+  padding: 0;
+  margin: 0;
+  color: var(--color-fore0);
+  background-color: var(--color-back0);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  font-size: var(--fsize-0);
+  font-weight: var(--font-weight-head);
+  line-height: var(--lh-head);
+}
+
+h1 { font-size: var(--fsize-3); }
+h2 { font-size: var(--fsize-2); }
+h3 { font-size: var(--fsize-1); }
+
+ol, ul {
+  list-style-type: disc;
+  margin-block-end: 2em;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  padding-inline-start: 0.2em;
+  margin-block-start: 1em;
+  margin-inline-start: 2em;
+}
+
+a:link, a:visited {
+  color: var(--color-link0);
+  text-decoration: underline;
+}
+
+a:hover, a:active, a:focus {
+  color: var(--color-link0-hover);
+}
+
+a:focus-visible {
+  text-decoration: none;
+  outline-color: var(--color-link0-trans);
+  outline-style: solid;
+  outline-offset: 0.2em;
+  outline-width: 0.2rem;
+}

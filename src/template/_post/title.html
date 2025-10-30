@@ -12,6 +12,6 @@
 
   ${ include('_post/share.html') }
 
-</section>
+  ${ data.imageHero ? `<figure class="hero"><img src="${ data.imageHero }" alt="${ data.imageAlt || 'article image' }" loading="eager"></figure>` : '' }
 
-${ data.imageHero ? `<figure class="hero"><img src="${ data.imageHero }" alt="${ data.imageAlt || 'article image' }" loading="eager"></figure>` : '' }
+</section>

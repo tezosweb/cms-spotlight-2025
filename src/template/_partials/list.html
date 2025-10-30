@@ -1,5 +1,5 @@
 ${ data?.pagination?.page?.length && `
-  <nav class="pagelist">
+  <nav class="pagelist grid3">
     ${ data?.pagination?.page.map(p => tacs.fn.format.articleLink(p, 'h2')).join('') }
   </nav>
 ` }

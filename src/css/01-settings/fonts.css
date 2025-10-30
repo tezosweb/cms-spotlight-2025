@@ -1,0 +1,101 @@
+/* heading */
+@font-face {
+  font-family: Eesti;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url(/media/fonts/Eesti-400.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Head Fallback';
+  src: local('Arial'), local('Roboto'), sans-serif;
+  size-adjust: 93%;
+  ascent-override: normal;
+  descent-override: normal;
+  line-gap-override: 5%;
+}
+
+/* body */
+@font-face {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: local('Roboto'), url(/media/fonts/Roboto-400.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: local('Roboto'), url(/media/fonts/Roboto-400italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: Roboto;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: local('Roboto'), url(/media/fonts/Roboto-600.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: Roboto;
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  src: local('Roboto'), url(/media/fonts/Roboto-600italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Body Fallback';
+  src: local('Arial'), sans-serif;
+  size-adjust: 85%;
+  ascent-override: normal;
+  descent-override: normal;
+  line-gap-override: 5%;
+}
+
+/* monospace */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: local('Roboto Mono'), url(/media/fonts/Roboto-mono-400.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: local('Roboto Mono'), url(/media/fonts/Roboto-mono-400italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: local('Roboto Mono'), url(/media/fonts/Roboto-mono-600.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  src: local('Roboto Mono'), url(/media/fonts/Roboto-mono-600italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Mono Fallback';
+  src: local('Courier New'), monospace;
+  size-adjust: 72%;
+  ascent-override: 98%;
+  descent-override: normal;
+  line-gap-override: 7%;
+}

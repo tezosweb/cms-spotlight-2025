@@ -1,0 +1,25 @@
+.linklist {
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 1em;
+  margin-inline: 1em;
+
+  &, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a:link, a:visited {
+    text-decoration: none;
+    color: var(--color-fore1);
+  }
+
+  a:hover, a:active, a:focus {
+    color: var(--color-fore0);
+  }
+
+}

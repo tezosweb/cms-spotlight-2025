@@ -1,0 +1,80 @@
+html {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  image-rendering: -webkit-optimize-contrast;
+  writing-mode: horizontal-tb;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  touch-action: manipulation;
+  color-scheme: dark;
+  interpolate-size: allow-keywords;
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+img, figure, picture, video {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  padding: 0;
+  margin: 0;
+}
+
+svg {
+  display: inline-block;
+}
+
+svg[hidden] {
+  display: none;
+}
+
+summary {
+  cursor: pointer;
+  &::marker { content: ''; }
+  &::-webkit-details-marker { display: none }
+}
+
+a {
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 0.2em;
+}
+
+nav, summary, label {
+  user-select: none;
+}
+
+:target {
+  scroll-margin-top: 1.5em;
+}
+
+/* web components */
+:not(:defined) {
+  display: none;
+}
+
+/* disable animations */
+@media (prefers-reduced-motion: reduce) {
+
+  *, *::before, *::after, ::backdrop {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-behavior: normal !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+}
