@@ -10,33 +10,74 @@
 
   --fsize-0: calc(18em / 16);
 
-  --fsize--1: calc(var(--fsize-0) * 0.7);
+  --fsize--1: calc(var(--fsize-0) * 0.9);
+  --fsize--2: calc(var(--fsize-0) * 0.8);
+  --fsize--3: calc(var(--fsize-0) * 0.7);
+  --fsize--4: calc(var(--fsize-0) * 0.6);
 
-  --fsize-1: calc(var(--fsize-0) * 1.5);
-  --fsize-2: calc(var(--fsize-0) * 2);
-  --fsize-3: calc(var(--fsize-0) * 2.5);
+  --fsize-1: calc(var(--fsize-0) * 1.25);
+  --fsize-2: calc(var(--fsize-0) * 1.5);
+  --fsize-3: calc(var(--fsize-0) * 1.75);
+  --fsize-4: calc(var(--fsize-0) * 2);
 
   --lh-head: 1.2;
   --lh-0: calc(28 / 18);
 
-  --pad-page: 24px;
+  --pad: 24px;
+  --pad2: calc(var(--pad) * 2);
+  --pad-pagelist0: 16px;
+  --pad-pagelist1: calc(var(--pad-pagelist0) * 1.5);
+
   --maxwidth-page: 1380px;
   --maxwidth-index: 1180px;
   --maxwidth-title: 800px;
   --maxwidth-post: 680px;
 
-  --color-back0: #121212;
-  --color-back1: #292929;
-  --color-back2: #5c72fa;
-  --color-back3: #6c235e;
+  --color-back0: oklch(0.182 0.000 0.0);
+  --color-back1: oklch(0.235 0.000 0);
+  --color-back2: oklch(0.281 0.000 0.0);
+  --color-back3: oklch(0.321 0.000 0);
 
-  --color-fore0: #fff;
-  --color-fore1: #888;
+  --color-fore0: oklch(1.000 0.000 0.0);
+  --color-fore1: oklch(0.627 0.000 0.0);
 
-  --color-link0: var(--color-back2);
+  --color-hint0: oklch(0.609 0.203 272.0);
+  --color-hint1: oklch(0.390 0.127 336.1);
+
+  --color-shad0: rgba(0,0,0,0.85);
+  --color-shad1: rgba(0,0,0,0.7);
+
+  --color-link0: var(--color-hint0);
   --color-link0-hover: color-mix(in oklab, var(--color-link0), var(--color-fore0) 50%);
   --color-link0-trans: color-mix(in oklab, var(--color-link0-hover), transparent 50%);
 
-  --color-grad1: linear-gradient(to right, var(--color-back3), var(--color-back2) ,var(--color-back3));
+  --color-hint0-trans: color-mix(in oklab, var(--color-hint0), transparent 80%);
+  --color-hint1-trans: color-mix(in oklab, var(--color-hint1), transparent 80%);
+
+  --color-grad0: linear-gradient(in oklab 90deg, var(--color-hint1), var(--color-hint0), var(--color-hint1));
+  --color-grad135: linear-gradient(in oklab 135deg, var(--color-hint0), var(--color-hint1));
+  --color-gradback:
+
+  --color-code-fore: light-dark(#393a34, #c5c8c6);
+  --color-code-back: light-dark(#f2f4f6, #1d1f21);
+  --color-code-border: light-dark(#ddd, #393d41);
+  --color-code-line: light-dark(#999, #555);
+  --color-code-comment: light-dark(#008000, #8c8c8c);
+  --color-code-punc: light-dark(#88f, #c5c8c6);
+  --color-code-keyword: light-dark(#9a050f, #96cbfe);
+  --color-code-class: light-dark(#00f, #ffffb6);
+  --color-code-const: light-dark(#06f, #99cc99);
+  --color-code-symbol: light-dark(#36acaa, #f92672);
+  --color-code-number: light-dark(#36acaa, #ff73fd);
+  --color-code-string: light-dark(#a31515, #a8ff60);
+  --color-code-var: light-dark(#c6c5fe, #c6c5fe);
+  --color-code-op: light-dark(#393a34, #ededed);
+  --color-code-attr: light-dark(#0000ff, #f9ee98);
+  --color-code-function: light-dark(#393a34, #dad085);
+  --color-code-regex: light-dark(#f00, #e9c062);
+  --color-code-important: light-dark(#e90, #fd971f);
+
+  --radius0: 5px;
+  --radius1: 8px;
 
 }

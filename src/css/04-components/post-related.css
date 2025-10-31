@@ -1,0 +1,19 @@
+/* related posts */
+.related {
+
+  margin-block-start: 8em;
+
+  > h2 {
+    font-size: var(--fsize-4);
+  }
+
+  > p {
+    color: var(--color-fore1);
+    margin-block-start: 0.8em;
+  }
+
+  > h2, > p {
+    text-align: center;
+  }
+
+}

@@ -1,6 +1,6 @@
 footer {
 
-  font-size: var(--fsize--1);
+  font-size: var(--fsize--2);
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
@@ -14,7 +14,7 @@ footer {
   border-block-start: 1px solid;
   border-block-end: 6px solid;
   border-image-slice: 1;
-  border-image-source: var(--color-grad1);
+  border-image-source: var(--color-grad0);
 
   .logo {
     padding-block: 3em 2em;

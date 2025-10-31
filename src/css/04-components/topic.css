@@ -1,0 +1,30 @@
+.topic {
+
+  ul, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.25em;
+    font-size: var(--fsize--4);
+  }
+
+  li a, span {
+    text-decoration: none;
+    padding-inline: 0.8em;
+    padding-block: 0.25em;
+    color: var(--color-fore0);
+    background-color: var(--color-shad1);
+    border-radius: var(--radius0);
+  }
+
+  .featured {
+    background-image: var(--color-grad135);
+  }
+
+}

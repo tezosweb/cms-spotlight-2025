@@ -2,4 +2,30 @@
 template: list.html
 ---
 
-${ tacs.group.get('featured')?.slice(0,1).map( p => tacs.fn.format.articleLink(p) ) }
+${ tacs.group.get('featured')?.slice(0,1).map( p => `
+  <article class="featured highlight"><a href="${ p.link }">
+
+    <div>
+      ${ p.imageThumb ? `<img src="${ p.imageThumb }"${ data.imageAlt ? ` alt="${ p.imageAlt }"` : '' } loading="eager">` : '<figure><svg class="spotlight"><use xlink:href="#spotlightlogo"></use></svg></figure>' }
+
+      <p class="topic">
+        ${ p.featured ? '<span class="featured">Featured</span>' : '' }
+        ${ p.topic ? `<span>${ p.topic }</span>` : '' }
+      </p>
+
+    </div>
+
+    <div>
+
+      <h2 class="nolink">${ p.title }</h2>
+
+      ${ p.organization ? `<p class="organization">By ${ p.organization }</p>` : '' }
+
+      ${ p.description ? `<p class="description">${ p.description }</p>` : '' }
+
+      ${ p.date ? `<p class="pubdate"><time datetime="${ tacs.fn.format.dateISO( p.date ) }">${ tacs.fn.format.dateHuman( p.date ) }</time></p>` : '' }
+
+    </div>
+
+  </a></article>
+` ) }

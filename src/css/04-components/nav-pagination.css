@@ -1,0 +1,59 @@
+/* numbered pagination */
+.pagination {
+
+  margin-block: 3em;
+  user-select: none;
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    inline-size: 2em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gap {
+    inline-size: auto;
+    padding: 0.3em 0;
+  }
+
+  a, span, strong {
+    display: block;
+    text-decoration: none;
+    padding: 0.25em 0;
+    color: var(--color-fore0);
+    background-color: var(--color-back1);
+  }
+
+  span {
+    color: var(--color-fore1);
+    background-color: var(--color-back1);
+  }
+
+  strong, span, a:hover, a:focus, a:active {
+    text-decoration: none;
+    background-color: var(--color-back0);
+  }
+
+  a:hover, a:focus, a:active {
+    background-color: var(--color-hint0);
+  }
+
+  @media (width > 34em) {
+
+    .back, .next {
+      inline-size: 3em;
+    }
+
+  }
+
+}

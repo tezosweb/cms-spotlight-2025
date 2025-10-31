@@ -4,11 +4,16 @@
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
-  gap: 1em;
-  margin-inline: 1em;
+  gap: 0.6em 1em;
+  margin-inline: var(--pad);
 
   &, li {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  * {
     padding: 0;
     margin: 0;
   }

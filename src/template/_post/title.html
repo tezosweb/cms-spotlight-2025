@@ -6,11 +6,15 @@
 
   ${ data.showDescription ? `<p class="description">${ data.description }</p>` : '' }
 
-  ${ include('_post/readtime.html') }
+  <div class="linklist">
 
-  ${ include('_post/date.html') }
+    ${ include('_post/readtime.html') }
 
-  ${ include('_post/share.html') }
+    ${ include('_post/date.html') }
+
+    ${ include('_post/share.html') }
+
+  </div>
 
   ${ data.imageHero ? `<figure class="hero"><img src="${ data.imageHero }" alt="${ data.imageAlt || 'article image' }" loading="eager"></figure>` : '' }
 

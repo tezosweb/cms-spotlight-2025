@@ -144,7 +144,7 @@ cmsData.post.forEach(p => {
 
     // add to groups
     groups.push( 'article' );
-    if (p.feature_post) groups.push( 'featured ');
+    if (p.feature_post) groups.push( 'featured' );
     if (p.author) groups.push( normalize(p.author) );
     if (org) groups.push( org.name );
   }

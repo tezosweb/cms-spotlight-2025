@@ -1,0 +1,22 @@
+/* post title */
+.title {
+
+  > .linklist {
+    margin-block-start: 3em;
+
+    .linklist {
+      margin-inline-start: auto;
+    }
+  }
+
+}
+
+.readtime, .pubdate {
+  font-size: var(--fsize--3);
+  color: var(--color-fore1);
+}
+
+.hero {
+  margin-block-start: 3em;
+  margin-block-end: 5em;
+}

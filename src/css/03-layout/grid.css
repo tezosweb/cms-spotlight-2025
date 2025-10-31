@@ -4,6 +4,6 @@
   display: grid;
   grid-auto-flow: row;
   grid-template-columns: repeat(auto-fit, minmax(calc(var(--maxwidth-index) / 4), 1fr));
-  gap: var(--pad-page);
+  gap: var(--pad);
 
 }

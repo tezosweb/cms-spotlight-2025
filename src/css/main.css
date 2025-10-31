@@ -1,14 +1,22 @@
-@import '01-settings/fonts';
-@import '01-settings/variables';
-@import '01-settings/reset';
+@import url('01-settings/fonts.css') layer(reset);
+@import url('01-settings/variables.css');
+@import url('01-settings/reset.css');
 
-@import '02-elements/block';
+@import url('02-elements/block.css');
+@import url('02-elements/table.css');
 
-@import '03-layout/layout';
-@import '03-layout/grid';
+@import url('03-layout/layout.css');
+@import url('03-layout/grid.css');
 
-@import '04-components/logo';
-@import '04-components/linklist';
-@import '04-components/footer';
+@import url('04-components/logo.css');
+@import url('04-components/linklist.css');
+@import url('04-components/topic.css');
+@import url('04-components/highlight.css');
+@import url('04-components/nav-pagelist.css');
+@import url('04-components/nav-pagination.css');
+@import url('04-components/post-head.css');
+@import url('04-components/post-related.css');
+@import url('04-components/code.css');
+@import url('04-components/footer.css');
 
-@import '05-utility/status';
+@import url('05-utility/status.css');
