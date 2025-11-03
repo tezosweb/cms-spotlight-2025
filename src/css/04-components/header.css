@@ -1,0 +1,161 @@
+/* page header */
+header {
+
+  user-select: none;
+  border-block-end: 1px solid var(--color-back2);
+  z-index: 1;
+
+  > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+}
+
+label[for="menu-open"] {
+
+  display: block;
+  padding-block: 1.5em;
+  color: var(--color-fore0);
+  cursor: pointer;
+
+  svg {
+    block-size: 1em;
+  }
+
+  .open {
+    display: block;
+  }
+
+  .close {
+    display: none;
+  }
+
+}
+
+.menu {
+
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  gap: 0;
+  inset: 100% 0 auto 0;
+  text-align: center;
+  background-color: var(--color-back0);
+  border-radius: 0 0 var(--radius2) var(--radius2);
+  border: 1px solid var(--color-back2);
+  box-shadow: 0 4px 5px var(--color-shad2);
+  overflow-y: auto;
+  overscroll-behavior: none;
+  z-index: 1;
+
+  summary {
+    padding-block: 0.5em;
+  }
+
+  ul, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a:link, a:visited {
+    display: block;
+    text-decoration: none;
+    padding-block: 0.4em;
+    color: var(--color-fore1);
+  }
+
+  a:hover, a:active, a:focus {
+    color: var(--color-link0-hover);
+  }
+
+  svg {
+    display: inline-block;
+    block-size: 1em;
+    inline-size: 1em;
+  }
+
+  summary svg {
+    rotate: 180deg;
+    transition: rotate 0.1s ease-out;
+  }
+
+  details[open] summary svg {
+    rotate: 0deg;
+  }
+
+}
+
+#menu-open:checked {
+
+  ~ label[for="menu-open"] {
+
+    .open { display: none; }
+    .close { display: block; }
+
+  }
+
+  ~ .menu {
+    display: flex;
+  }
+
+}
+
+/* desktop menu */
+@media (width > 40rem) {
+
+  label[for="menu-open"] {
+    display: none;
+  }
+
+  details::details-content {
+    transition: none;
+  }
+
+  .menu {
+    position: unset;
+    display: flex;
+    inline-size: auto;
+    block-size: auto;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    gap: 2em;
+    overflow: visible;
+    background-color: transparent;
+    border: 0 none;
+    box-shadow: none;
+
+    details, p {
+      position: relative;
+      padding-block: 1em;
+      margin: 0;
+    }
+
+  }
+
+  .submenu {
+    position: absolute;
+    inline-size: 10em;
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    margin-inline-start: -5.5em;
+    overflow: visible;
+    border-block-start: 1px solid var(--color-fore0);
+
+    ul {
+      padding-block: 0.5em;
+      margin-block-start: 1em;
+      background-color: var(--color-back2);
+      border-radius: var(--radius2);
+      border: 1px solid var(--color-back3);
+      box-shadow: 0 4px 5px var(--color-shad2);
+    }
+
+  }
+
+}

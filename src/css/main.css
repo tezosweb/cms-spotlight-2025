@@ -9,6 +9,7 @@
 @import url('03-layout/grid.css');
 
 @import url('04-components/logo.css');
+@import url('04-components/header.css');
 @import url('04-components/linklist.css');
 @import url('04-components/topic.css');
 @import url('04-components/tag.css');

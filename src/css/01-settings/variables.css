@@ -46,6 +46,7 @@
 
   --color-shad0: rgba(0,0,0,0.85);
   --color-shad1: rgba(0,0,0,0.7);
+  --color-shad2: rgba(0,0,0,0.4);
 
   --color-link0: var(--color-hint0);
   --color-link0-hover: color-mix(in oklab, var(--color-link0), var(--color-fore0) 50%);
@@ -79,5 +80,6 @@
 
   --radius0: 5px;
   --radius1: 8px;
+  --radius2: 12px;
 
 }

@@ -64,6 +64,19 @@ li {
   margin-inline-start: 1.3em;
 }
 
+details::details-content {
+  block-size: 0;
+  overflow: hidden;
+
+  @supports (interpolate-size: allow-keywords) {
+    transition: content-visibility 0.3s allow-discrete, height 0.3s ease-in-out;
+  }
+}
+
+details[open]::details-content {
+  block-size: auto;
+}
+
 blockquote {
   margin-block-end: 2rem;
   border-inline-start: 2px solid var(--color-fore0);
