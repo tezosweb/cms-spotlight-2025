@@ -5,7 +5,7 @@ ${ include('_partials/header.html') }
 <main>
 
   ${ data?.pagination ?
-    `<h1 class="pill${ data.link === tacs.root ? ' home' : '' }">${ data.isGroupIndex === 'article' ? '' : `<a href="${ tacs.root }">${ data.isTagIndex || data.isGroupIndex || data.title }</a>` } <span>${ tacs.fn.format.number( data.childPageTotal ) } article${ data.childPageTotal === 1 ? '' : 's'}</span>${ data.pagination.pageTotal > 1 ? `<span class="page">, page ${ tacs.fn.format.number( data.pagination.pageCurrent1 ) } of ${ tacs.fn.format.number( data.pagination.pageTotal ) }</span>` : '' }</h1>` :
+    `<h1 class="pill${ data.link === tacs.root ? ' home' : '' }">${ data.isGroupIndex === 'article' ? '' : `<a href="${ tacs.root }tag/">${ data.isTagIndex || data.isGroupIndex || data.title }</a>` } <span>${ tacs.fn.format.number( data.childPageTotal ) } article${ data.childPageTotal === 1 ? '' : 's'}</span>${ data.pagination.pageTotal > 1 ? `<span class="page">, page ${ tacs.fn.format.number( data.pagination.pageCurrent1 ) } of ${ tacs.fn.format.number( data.pagination.pageTotal ) }</span>` : '' }</h1>` :
     `<h1>${ data.title }</h1>`
   }
 

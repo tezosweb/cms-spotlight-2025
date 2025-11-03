@@ -11,10 +11,13 @@
 @import url('04-components/logo.css');
 @import url('04-components/linklist.css');
 @import url('04-components/topic.css');
+@import url('04-components/tag.css');
 @import url('04-components/highlight.css');
 @import url('04-components/nav-pagelist.css');
 @import url('04-components/nav-pagination.css');
+@import url('04-components/share.css');
 @import url('04-components/post-head.css');
+@import url('04-components/post-foot.css');
 @import url('04-components/post-related.css');
 @import url('04-components/code.css');
 @import url('04-components/footer.css');

@@ -1,0 +1,28 @@
+/* share icons */
+.share {
+
+  gap: 8px;
+
+  span {
+    display: none;
+  }
+
+  a, li, svg {
+    padding: 0;
+    margin: 0;
+  }
+
+  svg {
+    display: block;
+    inline-size: 20px;
+    block-size: 20px;
+    padding: 8px;
+  }
+
+  a:link, a:visited {
+    display: block;
+    background-color: var(--color-back3);
+    border-radius: var(--radius0);
+  }
+
+}

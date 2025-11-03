@@ -1,5 +1,8 @@
 footer {
 
+  position: sticky;
+  inset-block-start: 100vh;
+
   font-size: var(--fsize--2);
   display: grid;
   grid-template-columns: 1fr;

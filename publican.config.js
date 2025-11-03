@@ -30,6 +30,7 @@ const
   imgThumbTrans = env('CMS_THUMB_TRANS', ''),
   imgSocialTrans = env('CMS_SOCIAL_TRANS', ''),
   orgRoot = env('SITE_ORGROOT', 'author'),
+  rssMax = env('SITE_RSS_MAX', 10),
   postsMax = cmsData.settings?.posts_maximum || 12,
   relatedMax = cmsData.settings?.related_maximum || 6,
   organization = cmsData.organization || [],
@@ -104,7 +105,7 @@ publican.config.processPreRender.add( fnHooks.prerenderRelated );
 publican.config.processPostRender.add( fnHooks.postrenderMeta );
 
 // add posts from CMS
-let videoActive = false, podcastActive = false;
+let videoActive = false, podcastActive = false, homeFeatured = null, rssCount = 0;
 const
   reImg = new RegExp('(' + imgRoot.replaceAll('/', '\\/') + '[\\w|-]+)', 'gim'),
   repImg = `$1${ imgTrans }`,
@@ -143,8 +144,17 @@ cmsData.post.forEach(p => {
       });
 
     // add to groups
-    groups.push( 'article' );
-    if (p.feature_post) groups.push( 'featured' );
+    if (p.feature_post) {
+      homeFeatured = homeFeatured || p.slug;
+      groups.push( 'featured' );
+    }
+    if (p.slug !== homeFeatured) {
+      groups.push( 'article' );
+    }
+    if (rssCount < rssMax) {
+      rssCount++;
+      groups.push( 'rss' );
+    }
     if (p.author) groups.push( normalize(p.author) );
     if (org) groups.push( org.name );
   }

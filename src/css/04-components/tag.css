@@ -1,0 +1,62 @@
+/* tags */
+.pill.home {
+  display: none;
+}
+
+.taglist .linklist {
+
+  font-family: var(--font-head);
+  justify-content: start;
+  gap: 0.6em;
+
+  a {
+    position: relative;
+    margin-inline: 0;
+  }
+
+  sup {
+    position: absolute;
+    inset: -0.9em 0.2em auto auto;
+    font-size: var(--fsize--4);
+    line-height: 2;
+    inline-size: 1.8em;
+    block-size: 1.8em;
+    color: var(--color-back1);
+    background-color: var(--color-fore1);
+    border-radius: 2em;
+    opacity: 0;
+    transition: opacity 0.3s linear;
+  }
+
+  a:hover, a:active, a:focus {
+
+    sup {
+      opacity: 1;
+    }
+
+  }
+
+}
+
+.taglist, .pill {
+
+  font-size: var(--fsize-0);
+  color: var(--color-fore1);
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    padding-block: 0.2em;
+    padding-inline: 1em 1.5em;
+    margin-inline-end: 1em;
+    color: inherit;
+    border-radius: 2em;
+    background: var(--color-back3) url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 6 6 18M6 6l12 12' stroke='%23ccc' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat 95% 50%;
+    background-size: 16px;
+  }
+
+}
+
+.taglist a {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ccc' stroke-linecap='square' stroke-width='1.5' d='M9.2 4.5 12.8 8l-3.6 3.5m3-3.5h-9'/%3E%3C/svg%3E");
+}

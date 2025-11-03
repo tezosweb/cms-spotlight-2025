@@ -23,8 +23,14 @@
     border-radius: var(--radius0);
   }
 
-  .featured {
-    background-image: var(--color-grad135);
+}
+
+.topic, .taglist {
+
+  .featured, a.featured {
+    padding-inline: 1em;
+    color: var(--color-fore0);
+    background: var(--color-grad135);
   }
 
 }

@@ -1,0 +1,19 @@
+<script type="application/ld+json">{
+"@context": "http://schema.org/",
+"@type": "TechArticle",
+"proficiencyLevel": "beginner",
+"headline": "${ data.title || tacs.config.title }",
+"description": "${ data.description || tacs.config.description }",
+"datePublished": "${ tacs.fn.format.dateISO( data.date ) }T00:00:00+00:00",
+"dateModified": "${ tacs.fn.format.dateISO( data.date ) }T00:00:00+00:00",
+"mainEntityOfPage": { "@type": "WebPage", "@id": "${ tacs.config.domain }${ data.link }" },
+"image": "${ data.imageSocial || `${ tacs.root }media/favicon/favicon512.png` }",
+"author": { "@type": "Person", "name": "${ data.author || tacs.config.author }" },
+"publisher": { "@type": "Organization", "name": "${ data.organization || 'Tezos' }" },
+"inLanguage": "${ tacs.config.language }",
+"contentLocation": "online",
+"accessMode": ["textual"],
+"accessModeSufficient": "textual",
+"isFamilyFriendly": true,
+"wordCount": "${ data.wordCount }"
+}</script>

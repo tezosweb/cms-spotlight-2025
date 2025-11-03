@@ -1,0 +1,37 @@
+/* post foot */
+.postfoot {
+
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-block-start: 1.5em;
+  }
+
+  .topic {
+    margin-inline-start: auto;
+  }
+
+  .organization, .author {
+
+    margin-block-start: 0;
+
+    span {
+      font-size: var(--fsize--3);
+      color: var(--color-fore1);
+    }
+
+    strong {
+      display: block;
+      font-weight: var(--font-weight-normal);
+      font-size: var(--fsize--2);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+  }
+
+}
