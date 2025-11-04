@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Spotlight CMS Static Site Generator (2025 version)",
   "type": "module",
-  "main": "index.js",
+  "main": "publican.config.js",
   "scripts": {
-    "preview": "node --env-file=.env --env-file=.env.preview index.js",
-    "staging": "node --env-file=.env --env-file=.env.staging index.js",
+    "preview": "node --env-file=.env --env-file=.env.preview ./publican.config.js",
+    "staging": "node --env-file=.env --env-file=.env.staging ./publican.config.js",
     "start": "node --env-file=.env --env-file=.env.dev ./publican.config.js"
   },
   "homepage": "https://github.com/tezosweb/cms-spotlight-2025#readme",
@@ -27,7 +27,7 @@
     "static site"
   ],
   "dependencies": {
-    "esbuild": "0.25.11",
+    "esbuild": "0.25.12",
     "publican": "0.11.0"
   },
   "devDependencies": {

@@ -38,7 +38,10 @@ const
   postTopic = cmsData.topicSpotlight || [],
 
   // normalized tag map
-  tagMap = new Map();
+  tagMap = new Map(),
+
+  // image set
+  imgSet = new Set();
 
 // content defaults
 publican.config.dir.content = env('CONTENT_DIR');
@@ -107,8 +110,10 @@ publican.config.processPostRender.add( fnHooks.postrenderMeta );
 // add posts from CMS
 let videoActive = false, podcastActive = false, homeFeatured = null, rssCount = 0;
 const
-  reImg = new RegExp('(' + imgRoot.replaceAll('/', '\\/') + '[\\w|-]+)', 'gim'),
+  cmsImg = imgRoot.replaceAll('/', '\\/'),
+  reImg = new RegExp('(' + cmsImg + '[\\w|-]+)[^)|"|\\s]*', 'gim'),
   repImg = `$1${ imgTrans }`,
+  reCmsImg = new RegExp('(' + cmsImg + '[^"|)|\\s]+)', 'gi'),
   repYT = '\n<youtube-lite video="$1"></youtube-lite>\n';
 
 cmsData.post.forEach(p => {
@@ -175,11 +180,23 @@ cmsData.post.forEach(p => {
     .replace(/<iframe\s.*src="https:\/\/[www.]*youtube\.\w+\/embed\/([a-z0-9\-_]+).+<\/iframe>/gim, repYT)
     .trim();
 
+  // record images
+  if (!isProd) {
+
+    // CMS fields
+    if (imageHero) imgSet.add(imageHero);
+    if (imageThumb) imgSet.add(imageThumb);
+    if (imageSocial) imgSet.add(imageSocial);
+
+    // from content
+    content.match(reCmsImg)?.forEach(u => imgSet.add(u));
+  }
+
   publican.addContent(
     `${ p.slug }/index.md`,`
 ---
-title: ${ p.title }
-description: ${ p.description }
+title: ${ (p.title || '').replaceAll('"', '&quot;') }
+description: ${ (p.description || '').replaceAll('"', '&quot;') }
 status: ${ p.status }
 date: ${ p.date }
 menu: false
@@ -207,6 +224,20 @@ ${ content }
   );
 });
 
+// output list of CMS images in preview
+if (!isProd) {
+
+  publican.addContent(
+    'images.txt', `
+---
+menu: false
+index: false
+---
+${ [...imgSet].join('\n') }
+`
+  );
+}
+
 // update topics if videos or podcasts exist
 if (videoActive) postTopic.push({ ...videoActive, show: true });
 if (podcastActive) postTopic.push({ ...podcastActive, show: true });
@@ -232,7 +263,7 @@ publican.config.replace = new Map([
 // build options
 publican.config.minify.enabled = !isDev;  // minify in production mode
 publican.config.watch = isDev;            // watch in development mode
-publican.config.logLevel = isDev ? 2 : 0; // output verbosity
+publican.config.logLevel = isDev ? 2 : 1; // output verbosity
 
 // jsTACs globals
 tacs.config = tacs.config || {};

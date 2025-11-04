@@ -6,4 +6,8 @@
   grid-template-columns: repeat(auto-fit, minmax(calc(var(--maxwidth-index) / 4), 1fr));
   gap: var(--pad);
 
+  > * {
+    max-inline-size: calc(var(--maxwidth-index) / 2);
+  }
+
 }
