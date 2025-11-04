@@ -202,7 +202,6 @@ date: ${ p.date }
 menu: false
 priority: 1
 index: monthly
-url: ${ domain + publican.config.root + p.slug }
 topic: ${ postTopic?.[ p.topic_spotlight ]?.name || '' }
 topicSlug: ${ postTopic?.[ p.topic_spotlight ]?.slug || '' }
 ${ p.feature_post ? 'featured: true' : '' }
