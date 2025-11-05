@@ -7,6 +7,7 @@
   "scripts": {
     "preview": "node --env-file=.env --env-file=.env.preview ./publican.config.js",
     "staging": "node --env-file=.env --env-file=.env.staging ./publican.config.js",
+    "production": "echo 'not implemented'",
     "start": "node --env-file=.env --env-file=.env.dev ./publican.config.js"
   },
   "homepage": "https://github.com/tezosweb/cms-spotlight-2025#readme",

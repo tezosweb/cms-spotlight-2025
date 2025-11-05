@@ -181,7 +181,7 @@ cmsData.post.forEach(p => {
     .trim();
 
   // record images
-  if (!isProd) {
+  if (isProd) {
 
     // CMS fields
     if (imageHero) imgSet.add(imageHero);
@@ -190,6 +190,7 @@ cmsData.post.forEach(p => {
 
     // from content
     content.match(reCmsImg)?.forEach(u => imgSet.add(u));
+
   }
 
   publican.addContent(
@@ -222,20 +223,6 @@ ${ content }
 `
   );
 });
-
-// output list of CMS images in preview
-if (!isProd) {
-
-  publican.addContent(
-    'images.txt', `
----
-menu: false
-index: false
----
-${ [...imgSet].join('\n') }
-`
-  );
-}
 
 // update topics if videos or podcasts exist
 if (videoActive) postTopic.push({ ...videoActive, show: true });
