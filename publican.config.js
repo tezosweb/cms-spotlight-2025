@@ -4,6 +4,7 @@ import { Publican, tacs } from 'publican';
 import esbuild from 'esbuild';
 
 import { cmsFetch } from './lib/cmsFetch.js';
+import { imgFetch, copyMedia } from './lib/imgFetch.js';
 import { env, normalize } from './lib/util.js';
 
 import * as fnNav from './lib/nav.js';
@@ -94,18 +95,6 @@ organization.forEach(org => {
   };
 
 });
-
-// pass-through files
-publican.config.passThrough.add({ from: './src/media/', to: './media/' });
-
-// processRenderStart hook: create tacs.tagScore Map
-publican.config.processRenderStart.add( fnHooks.renderstartTagScore );
-
-// processPreRender hook: determine related posts
-publican.config.processPreRender.add( fnHooks.prerenderRelated );
-
-// processPostRender hook: add <meta> tags
-publican.config.processPostRender.add( fnHooks.postrenderMeta );
 
 // add posts from CMS
 let videoActive = false, podcastActive = false, homeFeatured = null, rssCount = 0;
@@ -227,6 +216,35 @@ ${ content }
 // update topics if videos or podcasts exist
 if (videoActive) postTopic.push({ ...videoActive, show: true });
 if (podcastActive) postTopic.push({ ...podcastActive, show: true });
+
+// pass-through files
+publican.config.passThrough.add({ from: './src/media/favicon/', to: './media/favicon/' });
+publican.config.passThrough.add({ from: './src/media/fonts/', to: './media/fonts/' });
+publican.config.passThrough.add({ from: './src/media/static/', to: './media/static/' });
+
+// processRenderStart hook: create tacs.tagScore Map
+publican.config.processRenderStart.add( fnHooks.renderstartTagScore );
+
+// processPreRender hook: determine related posts
+publican.config.processPreRender.add( fnHooks.prerenderRelated );
+
+// processPostRender hook: add <meta> tags
+publican.config.processPostRender.add( fnHooks.postrenderMeta );
+
+// fetch and copy images in production mode
+if (isProd) {
+
+  const imgMap = await imgFetch( imgSet );
+
+  // static image replacement
+  if (imgMap) {
+
+    // copy/symlink files
+    await copyMedia(publican.config, './media/image/');
+
+  }
+
+}
 
 // replacement strings
 publican.config.replace = new Map([

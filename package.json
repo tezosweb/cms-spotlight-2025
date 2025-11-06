@@ -29,6 +29,7 @@
   ],
   "dependencies": {
     "esbuild": "0.25.12",
+    "image-meta": "0.2.2",
     "publican": "0.11.0"
   },
   "devDependencies": {

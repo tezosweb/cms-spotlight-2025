@@ -33,15 +33,15 @@
   --maxwidth-title: 800px;
   --maxwidth-post: 680px;
 
-  --color-back0: oklch(0.182 0.000 0.0);
+  --color-back0: oklch(0.182 0.000 0);
   --color-back1: oklch(0.235 0.000 0);
-  --color-back2: oklch(0.281 0.000 0.0);
+  --color-back2: oklch(0.281 0.000 0);
   --color-back3: oklch(0.321 0.000 0);
 
-  --color-fore0: oklch(1.000 0.000 0.0);
-  --color-fore1: oklch(0.627 0.000 0.0);
+  --color-fore0: oklch(1.000 0.000 0);
+  --color-fore1: oklch(0.627 0.000 0);
 
-  --color-hint0: oklch(0.609 0.203 272.0);
+  --color-hint0: oklch(0.609 0.203 272);
   --color-hint1: oklch(0.390 0.127 336.1);
 
   --color-shad0: rgba(0,0,0,0.85);
