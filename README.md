@@ -156,7 +156,7 @@ SHOW_FUTURE=true
 
 ### `.env.staging` production build defaults
 
-Contains published posts and copies CMS assets to the build directory:
+Contains published posts and copies optimized CMS assets to the build directory:
 
 ```ini
 # build mode
@@ -167,4 +167,15 @@ PRODUCTION=true
 
 # SSG configuration
 BUILD_DIR=./build.staging/
+
+# media clone
+MEDIA_BUILD_DIR=./build.media/
+MEDIA_BUILD_SUB=image
+MEDIA_BUILD_MAP=image.json
+MEDIA_LOAD_MAX=5
+MEDIA_TIMEOUT=10
+MEDIA_FAIL_IMG=media/static/spotlight.svg
+MEDIA_SYMLINK=true
 ```
+
+`MEDIA_LOAD_MAX` is the number of images to fetch concurrently. The CMS can struggle to cope with a significant number of image transformation requests.

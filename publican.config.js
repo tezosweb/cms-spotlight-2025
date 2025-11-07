@@ -4,7 +4,7 @@ import { Publican, tacs } from 'publican';
 import esbuild from 'esbuild';
 
 import { cmsFetch } from './lib/cmsFetch.js';
-import { imgFetch, copyMedia } from './lib/imgFetch.js';
+import { mediaImgDir, imgFetch, symlinkMedia, imgLookup } from './lib/imgFetch.js';
 import { env, normalize } from './lib/util.js';
 
 import * as fnNav from './lib/nav.js';
@@ -102,7 +102,7 @@ const
   cmsImg = imgRoot.replaceAll('/', '\\/'),
   reImg = new RegExp('(' + cmsImg + '[\\w|-]+)[^)|"|\\s]*', 'gim'),
   repImg = `$1${ imgTrans }`,
-  reCmsImg = new RegExp('(' + cmsImg + '[^"|)|\\s]+)', 'gi'),
+  reCmsImg = new RegExp(cmsImg + '[^"|)|\\s]+', 'gi'),
   repYT = '\n<youtube-lite video="$1"></youtube-lite>\n';
 
 cmsData.post.forEach(p => {
@@ -186,7 +186,7 @@ cmsData.post.forEach(p => {
     `${ p.slug }/index.md`,`
 ---
 title: ${ (p.title || '').replaceAll('"', '&quot;') }
-description: ${ (p.description || '').replaceAll('"', '&quot;') }
+${ p.description ? `description: ${ String(p.description).replaceAll('"', '&quot;') } ` : '' }
 status: ${ p.status }
 date: ${ p.date }
 menu: false
@@ -234,13 +234,55 @@ publican.config.processPostRender.add( fnHooks.postrenderMeta );
 // fetch and copy images in production mode
 if (isProd) {
 
-  const imgMap = await imgFetch( imgSet );
+  const imgRep = await imgFetch( imgSet );
 
   // static image replacement
-  if (imgMap) {
+  if (imgRep) {
 
-    // copy/symlink files
-    await copyMedia(publican.config, './media/image/');
+    // image file symlink
+    const symlinkFn = symlinkMedia(dest, './media/image/');
+
+    if (symlinkFn) {
+      publican.config.processRenderEnd.add( symlinkFn );
+    }
+    else {
+      // image file copy
+      publican.config.passThrough.add({ from: mediaImgDir, to: './media/image/' });
+    }
+
+    // <img> regular expression
+    const reImgTagFind = new RegExp(`<img\\s+src=["|']*(${ cmsImg }.+?)["|'|\\s](.*?)>`, 'gism');
+
+    // processPostRender hook: replace CMS with static images
+    publican.config.processPostRender.add( (output, data) => {
+
+      if (data.isHTML || data.isXML) {
+
+        output = output
+          .replace(
+            reImgTagFind, // replace <img> tags
+            (match, url, attr) => {
+
+              const rep = imgLookup( url );
+              return `<img src="${ data.isXML ? domainProd : '' }${ publican.config.root }${ rep.i.includes('/') ? rep.i : 'media/image/' + rep.i }"${ rep.w ? ` width="${ rep.w }"` : ''}${ rep.h ? ` height="${ rep.h }"` : ''} ${ attr }>`;
+
+            }
+          )
+          .replace(
+            reCmsImg,   // replace other references
+            url => {
+
+              const rep = imgLookup( url );
+              return `${ domainProd }${ publican.config.root }${ rep.i.includes('/') ? rep.i : 'media/image/' + rep.i }`;
+
+            }
+          );
+
+      }
+
+      return output;
+
+    });
 
   }
 
@@ -276,6 +318,7 @@ tacs.config.isProd = isProd;
 tacs.config.version = pkg.version;
 tacs.config.language = env('SITE_LANGUAGE', 'en');
 tacs.config.domain = domain;
+tacs.config.domainProd = domainProd;
 tacs.config.title = env('SITE_TITLE');
 tacs.config.description = env('SITE_DESCRIPTION');
 tacs.config.author = env('SITE_AUTHOR');
