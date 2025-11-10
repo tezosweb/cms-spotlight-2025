@@ -6,8 +6,11 @@
   "main": "publican.config.js",
   "scripts": {
     "preview": "node --env-file=.env --env-file=.env.preview ./publican.config.js",
+    "stagedeploy": "npm run staging && npm run stagecopy && npm run stagecache",
     "staging": "node --env-file=.env --env-file=.env.staging ./publican.config.js",
-    "production": "echo 'not implemented'",
+    "stagecopy": "gcloud storage rsync /home/tezos/spotlight.staging gs://tf-cms-spotlight-staging --recursive --delete-unmatched-destination-objects --checksums-only --continue-on-error --clear-custom-metadata --no-user-output-enabled --gzip-in-flight=.html,.xml,.css,.js,.txt,.svg",
+    "stagecache": "gcloud compute url-maps invalidate-cdn-cache tezos-spotlight-staging --path \"/*\" --async",
+    "productiondeploy": "echo 'not implemented'",
     "start": "node --env-file=.env --env-file=.env.dev ./publican.config.js"
   },
   "homepage": "https://github.com/tezosweb/cms-spotlight-2025#readme",
