@@ -15,10 +15,6 @@ code {
 	color: var(--color-code-fore);
 }
 
-code {
-	white-space: normal;
-}
-
 :where(h1, h2, h3, h4) code {
 	font-size: inherit;
 }
