@@ -175,7 +175,7 @@ MEDIA_BUILD_MAP=image.json
 MEDIA_LOAD_MAX=5
 MEDIA_TIMEOUT=10
 MEDIA_FAIL_IMG=media/static/spotlight.svg
-MEDIA_SYMLINK=true
+MEDIA_SYMLINK=false
 ```
 
 `MEDIA_LOAD_MAX` is the number of images to fetch concurrently. The CMS can struggle to cope with a significant number of image transformation requests.

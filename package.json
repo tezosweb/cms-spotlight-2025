@@ -10,7 +10,9 @@
     "staging": "node --env-file=.env --env-file=.env.staging ./publican.config.js",
     "stagecopy": "gcloud storage rsync /home/tezos/spotlight.staging gs://tf-cms-spotlight-staging --recursive --delete-unmatched-destination-objects --checksums-only --continue-on-error --clear-custom-metadata --no-user-output-enabled --gzip-in-flight=.html,.xml,.css,.js,.txt,.svg",
     "stagecache": "gcloud compute url-maps invalidate-cdn-cache tezos-spotlight-staging --path \"/*\" --async",
-    "productiondeploy": "echo 'not implemented'",
+    "productiondeploy": "npm run productioncopy && npm run productioncache",
+    "productioncopy": "gcloud storage rsync /home/tezos/spotlight.staging gs://tf-cms-spotlight-production --recursive --delete-unmatched-destination-objects --checksums-only --continue-on-error --clear-custom-metadata --no-user-output-enabled --gzip-in-flight=.html,.xml,.css,.js,.txt,.svg",
+    "productioncache": "gcloud compute url-maps invalidate-cdn-cache tezos-spotlight-production --path \"/*\" --async",
     "start": "node --env-file=.env --env-file=.env.dev ./publican.config.js"
   },
   "homepage": "https://github.com/tezosweb/cms-spotlight-2025#readme",
@@ -31,7 +33,7 @@
     "static site"
   ],
   "dependencies": {
-    "esbuild": "0.25.12",
+    "esbuild": "0.27.0",
     "image-meta": "0.2.2",
     "publican": "0.11.0"
   },

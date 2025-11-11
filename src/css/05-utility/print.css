@@ -1,0 +1,74 @@
+/* print styles */
+@media print {
+
+  *,
+  *::before,
+  *::after {
+    color: #000 !important;
+    background-color: #fff !important;
+    border-color: #888 !important;
+    text-decoration-color: #888 !important;
+  }
+
+  body {
+    --fsize-0: 13px !important;
+    padding: 0;
+    margin: 2rem;
+  }
+
+  body::before, header, footer, aside, youtube-lite,
+  .menu, .share, .headlink, .topic, .pagination {
+    display: none !important;
+  }
+
+  main, main > * {
+    max-inline-size: none !important;
+  }
+
+  main {
+    column-width: 22rem;
+    column-gap: 4rem;
+    padding: 0;
+    margin: 0;
+
+    &::before {
+      display: block;
+      content: 'Tezos Spotlight';
+      font-weight: bold;
+      text-align: center;
+      margin-block-end: 0.5em;
+      border-block-end: 1px solid #888;
+    }
+
+  }
+
+  img, picture, svg {
+    max-inline-size: 75% !important;
+    margin-inline: auto !important;
+  }
+
+  .featured, .pagelist {
+    img, picture, svg {
+      max-inline-size: 100% !important;
+    }
+  }
+
+  .title > .linklist, .hero {
+    margin-block: 1em;
+  }
+
+  pre, code {
+    font-size: 12px !important;
+    white-space: pre-wrap !important;
+  }
+
+  pre {
+    border: 1px solid #ccc !important;
+  }
+
+  article, table, img, picture, figure, svg, li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+}

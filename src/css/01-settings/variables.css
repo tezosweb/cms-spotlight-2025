@@ -18,7 +18,7 @@
   --fsize-1: calc(var(--fsize-0) * 1.25);
   --fsize-2: calc(var(--fsize-0) * 1.5);
   --fsize-3: calc(var(--fsize-0) * 1.75);
-  --fsize-4: calc(var(--fsize-0) * 2);
+  --fsize-4: calc(var(--fsize-0) * 2.4);
 
   --lh-head: 1.2;
   --lh-0: calc(28 / 18);

@@ -17,10 +17,14 @@
   li a, span {
     text-decoration: none;
     padding-inline: 0.8em;
-    padding-block: 0.25em;
+    padding-block: 0.3em;
     color: var(--color-fore0);
     background-color: var(--color-shad1);
     border-radius: var(--radius0);
+  }
+
+  a:hover, a:active, a:focus {
+    background-color: var(--color-back3);
   }
 
 }

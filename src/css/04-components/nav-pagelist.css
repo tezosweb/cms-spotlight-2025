@@ -1,6 +1,6 @@
 /* lists of pages */
 nav.pagelist {
-  margin-block: var(--pad2);
+  margin-block: var(--pad);
 }
 
 nav.pagelist article {
@@ -16,6 +16,10 @@ nav.pagelist article {
     color: var(--color-fore1);
     background-color: var(--color-back1);
     border-radius: var(--radius1);
+
+    &:hover, &:active, &:focus {
+      background-color: var(--color-back2);
+    }
   }
 
   img, svg {

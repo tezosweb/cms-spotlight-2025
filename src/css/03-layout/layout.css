@@ -25,6 +25,6 @@ main, aside, footer {
   max-inline-size: var(--maxwidth-title);
 }
 
-main > :is(h1, .featured, .pagelist, .pagination), aside.related > * {
+main > :is(h1, .full, .featured, .pagelist, .pagination), aside.related > * {
   max-inline-size: var(--maxwidth-index);
 }

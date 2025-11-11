@@ -13,6 +13,10 @@ article.highlight {
     background-color: var(--color-back1);
     background-image: radial-gradient(ellipse farthest-corner at 50% -20% in hsl shorter hue, var(--color-hint0-trans) 10%, var(--color-hint1-trans) 40%, transparent 80%);
     border-radius: var(--radius1);
+
+    &:hover, &:active, &:focus {
+      background-color: var(--color-back2);
+    }
   }
 
   div {

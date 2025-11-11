@@ -364,7 +364,18 @@ const
   target = env('BROWSER_TARGET', '').split(','),
   logLevel = isDev ? 'info' : 'error',
   minify = !isDev,
-  sourcemap = isDev && 'linked';
+  sourcemap = isDev && 'linked',
+  define = {
+    '__ISDEV__': JSON.stringify(isDev),
+    '__VERSION__': `'${ tacs.config.version }'`,
+    '__DOMAIN__': `'${ domainProd }'`,
+    '__ROOT__': `'${ publican.config.root }'`,
+    '__GTMID__': `'${ tacs.config.GTMID }'`,
+    '__PHKEY__': `'${ tacs.config.PostHog.key }'`,
+    '__PHDEF__': `'${ tacs.config.PostHog.def }'`,
+    '__PHPRO__': `'${ tacs.config.PostHog.pro }'`,
+  },
+  drop = (isDev ? [] : ['debugger', 'console']);
 
 // bundle CSS
 const buildCSS = await esbuild.context({
@@ -388,7 +399,7 @@ const buildCSS = await esbuild.context({
 
 });
 
-// bundle JS
+// bundle main JS
 const buildJS = await esbuild.context({
 
   entryPoints: [ `${ src }js/main.js` ],
@@ -396,23 +407,36 @@ const buildJS = await esbuild.context({
   bundle: true,
   target,
   external: [],
-  define: {
-    '__ISDEV__': JSON.stringify(isDev),
-    '__VERSION__': `'${ tacs.config.version }'`,
-    '__DOMAIN__': `'${ domainProd }'`,
-    '__ROOT__': `'${ publican.config.root }'`,
-    '__GTMID__': `'${ tacs.config.GTMID }'`,
-    '__PHKEY__': `'${ tacs.config.PostHog.key }'`,
-    '__PHDEF__': `'${ tacs.config.PostHog.def }'`,
-    '__PHPRO__': `'${ tacs.config.PostHog.pro }'`,
-  },
-  drop: isDev ? [] : ['debugger', 'console'],
+  define,
+  drop,
   logLevel,
   minify,
   sourcemap,
   outdir: `${ dest }js/`
 
 });
+
+// bundle service worker
+const buildSW = await esbuild.context({
+
+  entryPoints: [ `${ src }js/sw.js` ],
+  format: 'esm',
+  bundle: true,
+  target,
+  external: [],
+  define,
+  drop,
+  logLevel,
+  minify,
+  sourcemap,
+  outdir: `${ dest }`
+
+});
+
+// single service worker build
+await buildSW.rebuild();
+buildSW.dispose();
+
 
 if (publican.config.watch) {
 
