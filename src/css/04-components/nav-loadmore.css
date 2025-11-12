@@ -1,0 +1,57 @@
+/* client-side "load more" page list navigation */
+nav.loadmore {
+
+  margin-block-start: 5em;
+
+  p {
+    text-align: center;
+  }
+
+  button {
+    display: block;
+    font-family: var(--font-head);
+    font-size: var(--fsize-0);
+    font-weight: var(--font-weight-head);
+    inline-size: 9em;
+    padding-block: 0.5em;
+    margin-block: 1em;
+    margin-inline: auto;
+    color: var(--color-fore0);
+    background-color: transparent;
+    border: 2px solid var(--color-fore0);
+    border-radius: 2em;
+    cursor: pointer;
+
+    &.loading, &:hover, &:active, &:focus {
+      color: var(--color-link0);
+      border-color: var(--color-link0);
+    }
+
+    &.loading::after {
+      display: inline-block;
+      content: '';
+      vertical-align: middle;
+      inline-size: 1em;
+      block-size: 1em;
+      margin-inline-start: 0.5em;
+      border-radius: 2em;
+      border: 2px solid var(--color-link0);
+      border-block-start-style: none;
+      animation: 0.7s linear 0s infinite spin;
+    }
+
+  }
+
+}
+
+body.loadmore {
+
+  h1 .page, nav.pagination { display: none; }
+  nav.loadmore { display: block; }
+
+}
+
+@keyframes spin {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
+}

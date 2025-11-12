@@ -4,8 +4,12 @@
   > .linklist {
     margin-block-start: 3em;
 
-    .linklist {
-      margin-inline-start: auto;
+    @media (width > 40rem) {
+
+      .linklist {
+        margin-inline-start: auto;
+      }
+
     }
   }
 
