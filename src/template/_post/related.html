@@ -5,7 +5,7 @@ ${ data.showRelated && data?.related?.length ? `
     <nav class="pagelist grid3">${
       data.related
         .slice(0, tacs.config.relatedMax)
-        .map(p => tacs.fn.format.articleLink(p, 'h3'))
+        .map(p => tacs.fn.format.articleLink(p, 'h3', 'lazy'))
         .join('')
     }</nav>
   </aside>
