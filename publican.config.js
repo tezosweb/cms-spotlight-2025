@@ -251,12 +251,16 @@ if (isProd) {
     }
 
     // <img> regular expression
-    const reImgTagFind = new RegExp(`<img\\s+src=["|']*(${ cmsImg }.+?)["|'|\\s](.*?)>`, 'gism');
+    const reImgTagFind = new RegExp(`<img\\s+src=['|"|\\\\]*(${ cmsImg }.+?)['|"|\\\\]*?\\s+(.*?)>`, 'gism');
 
     // processPostRender hook: replace CMS with static images
     publican.config.processPostRender.add( (output, data) => {
 
-      if (data.isHTML || data.isXML) {
+      const
+        isJSON = data.slug.endsWith('.json'),
+        quot = isJSON ? '\\"' : '"';
+
+      if (data.isHTML || data.isXML || isJSON) {
 
         output = output
           .replace(
@@ -264,7 +268,7 @@ if (isProd) {
             (match, url, attr) => {
 
               const rep = imgLookup( url );
-              return `<img src="${ data.isXML ? domainProd : '' }${ publican.config.root }${ rep.i.includes('/') ? rep.i : 'media/image/' + rep.i }"${ rep.w ? ` width="${ rep.w }"` : ''}${ rep.h ? ` height="${ rep.h }"` : ''} ${ attr }>`;
+              return `<img src=${ quot }${ data.isXML || isJSON ? domainProd : '' }${ publican.config.root }${ rep.i.includes('/') ? rep.i : 'media/image/' + rep.i }${ quot }${ rep.w ? ` width=${ quot }${ rep.w }${ quot }` : ''}${ rep.h ? ` height=${ quot }${ rep.h }${ quot }` : ''} ${ attr }>`;
 
             }
           )
@@ -296,14 +300,17 @@ publican.config.replace = new Map([
   [ ' style="text-align:end"', ' class="right"' ],
   [ ' style="text-align:right"', ' class="right"' ],
   [ ' style="text-align:center"', ' class="center"' ],
-  [ '<table>', '<div class="tablescroll"><table>' ],
-  [ '</table>', '</table></div>' ],
+  [ /[^<div class="tablescroll">]<table>/gm, '<div class="tablescroll"><table>' ],
+  [ /<\/table>[^</div>]/gm, '</table></div>' ],
   [ /<p>(<img.+?>)<\/p>/gim, '$1' ],                                        // <p> around <img>
   [ /<img(\b(?![^>]*\balt\s*=)[^>]*)>/gism, '<img$1 alt="illustration">' ], // <img> alt
   [ /<img(\b(?![^>]*\bloading\s*=)[^>]*)>/gism, '<img$1 loading="lazy">' ], // <img> lazy loading
   [ /alt=""/gim, 'alt="decoration"' ],                                      // empty alt
   [ /<p>(<youtube-lite.+?><\/youtube-lite>)<\/p>/gim, '$1' ],               // <p> around <youtube-lite>
-  [ /<\/blockquote>\s*<blockquote>/gi, '' ],                  // multiple <blockquote>
+  [ /<\/blockquote>\s*<blockquote>/gi, '' ],                                // multiple <blockquote>
+  [ '&feedquot;', '\\"' ],                                                  // JSON feed replace
+  [ '&feedtab;', '\\t' ],
+  [ '&feedcr;', '\\n' ],
 ]);
 
 // build options

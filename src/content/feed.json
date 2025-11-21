@@ -1,0 +1,25 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "language": "${ tacs.config.language }",
+  "home_page_url": "${ tacs.config.domain }${ tacs.root }",
+  "feed_url": "${ tacs.config.domain }${ data.link }",
+  "title": "${ tacs.config.title }",
+  "description": "${ tacs.fn.format.json( tacs.config.description ) }",
+  "icon": "${ tacs.config.domain }${ tacs.root }media/favicon/favicon512.png",
+  "favicon": "${ tacs.config.domain }${ tacs.root }media/favicon/favicon.svg",
+  "items": [
+    ${ tacs.group.get('rss')?.map((p, i, all) => `
+    {
+      "id": "${ tacs.config.domain }${ p.link }",
+      "url": "${ tacs.config.domain }${ p.link }",
+      "date_published": "${ tacs.fn.format.dateISO( p.date ) }",
+      "title": "${ tacs.fn.format.json( p.title ) }",
+      "summary": "${ tacs.fn.format.json( p.description ) }",
+      ${ p?.tags?.length ? `"tags": "${ p.tags.map(t => t.tag).join(',') }",` : '' }
+      ${ p.imageHero ? `"image": "${ p.imageHero }",` : '' }
+      ${ p.imageSocial ? `"banner_image": "${ p.imageSocial }",` : '' }
+      "content-html": "${ tacs.fn.format.json( p.contentRendered ) }"
+    }${ i < all.length - 1 ? ',' : ''}
+    `)}
+  ]
+}

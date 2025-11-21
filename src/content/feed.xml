@@ -17,7 +17,7 @@ ${ tacs.group.get('rss')?.map(p => `
 <guid isPermaLink="true">${ tacs.config.domain }${ p.link }</guid>
 <pubDate>${ tacs.fn.format.dateUTC( p.date ) }</pubDate>
 <dc:creator>${ p.author || tacs.config.author }</dc:creator>
-<description>${ p.description }</description>
+<description>${ p.description.replaceAll('&', '&amp;') }</description>
 <content:encoded><![CDATA[
 ${ tacs.fn.format.rss( p.contentRendered ) }
 ]]></content:encoded>
