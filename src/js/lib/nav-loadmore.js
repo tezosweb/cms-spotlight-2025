@@ -16,7 +16,7 @@
   let
     next = nextPageURL(),
     countTotal = parseFloat( showCount.textContent || 0),
-    loading = false;
+    loading = false, first;
 
   // enable "show more" functionality
   if (lmButton) {
@@ -36,12 +36,13 @@
 
 
   // load next set of articles
-  async function loadMoreHandler() {
+  async function loadMoreHandler(userClick) {
 
     if (loading || !next) return;
 
     // loading state
     loading = true;
+    first = null;
     lmButton.classList.add('loading');
     lmButton.textContent = 'Loading';
 
@@ -65,8 +66,24 @@
         // store current count state
         sessionStorage.setItem(`ct-${ location.pathname }`, countTotal);
 
+        if (userClick) {
+
+          // get first child
+          first = article.firstElementChild;
+
+          // set animation sibling count
+          Array.from( article.children ).forEach((c, i) => {
+            c.style.setProperty('--pagelist-index', i + 1);
+            c.classList.add('animatein');
+          });
+
+        }
+
         // append new articles
         pageList.append( ...article.children );
+
+        // scroll first child into view
+        if (first) first.scrollIntoView(true, { behavior: 'smooth' });
 
       }
 

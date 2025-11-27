@@ -5,6 +5,15 @@ nav.pagelist {
 
 nav.pagelist article {
 
+  @supports (animation-delay: 1s) {
+
+    &.animatein {
+      opacity: 0;
+      animation: 0.5s cubic-bezier(.7,-0.5,.3,1.5) calc(var(--pagelist-index, 0) * 0.05s) forwards pagelist-in;
+    }
+
+  }
+
   a {
     box-sizing: border-box;
     position: relative;
@@ -85,4 +94,15 @@ nav.pagelist article {
 
   }
 
+}
+
+@keyframes pagelist-in {
+  0% {
+    opacity: 0;
+    transform: translateY(15vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
