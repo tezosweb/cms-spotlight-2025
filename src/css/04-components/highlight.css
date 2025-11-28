@@ -70,10 +70,11 @@ article.highlight {
     position: absolute;
     inset-block-end: auto;
     inset-inline-start: auto;
-    inset-block-start: calc(var(--pad-pagelist0));
+    inset-block-start: 0;
     inset-inline-end: calc(var(--pad-pagelist0));
     padding: 0;
     margin: 0;
+    padding-block-start: calc(56.25% - var(--pad-pagelist0) * 2);
 
     span {
       margin-inline-start: 0.25em;
