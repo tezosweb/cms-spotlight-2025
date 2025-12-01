@@ -15,8 +15,9 @@
   }
 
   svg.spotlight {
-    inline-size: 95px;
-    block-size: 25px;
+    inline-size: 115px;
+    block-size: 26px;
+    padding-block-start: 2px;
     padding-inline-start: 6px;
   }
 
