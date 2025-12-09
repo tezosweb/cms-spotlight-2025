@@ -33,9 +33,9 @@
     "static site"
   ],
   "dependencies": {
-    "esbuild": "0.27.0",
+    "esbuild": "0.27.1",
     "image-meta": "0.2.2",
-    "publican": "0.11.0"
+    "publican": "0.12.0"
   },
   "devDependencies": {
     "livelocalhost": "1.2.4"

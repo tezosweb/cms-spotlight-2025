@@ -183,34 +183,35 @@ cmsData.post.forEach(p => {
   }
 
   publican.addContent(
-    `${ p.slug }/index.md`,`
----
-title: ${ (p.title || '').replaceAll('"', '&quot;') }
-${ p.description ? `description: ${ String(p.description).replaceAll('"', '&quot;') } ` : '' }
-status: ${ p.status }
-date: ${ p.date }
-menu: false
-priority: 1
-index: monthly
-topic: ${ postTopic?.[ p.topic_spotlight ]?.name || '' }
-topicSlug: ${ postTopic?.[ p.topic_spotlight ]?.slug || '' }
-${ p.feature_post ? 'featured: true' : '' }
-${ imageHero ? `imageHero: ${ imageHero }` : ''}
-${ imageThumb ? `imageThumb: ${ imageThumb }` : ''}
-${ imageSocial ? `imageSocial: ${ imageSocial }` : ''}
-${ imageAlt ? `imageAlt: ${ imageAlt }` : ''}
-${ p.show_description ? 'showDescription: true' : '' }
-${ p.show_related ? 'showRelated: true' : '' }
-${ p.author ? `author: ${ p.author }` : '' }
-${ p.source ? `source: ${ p.source }` : '' }
-${ p.source_url ? `sourceURL: ${ p.source_url }` : '' }
-${ tags.length ? `tags: ${ tags.join(',') }` : '' }
-${ groups.length ? `groups: ${ groups.join(',') }` : ''}
-${ org ? `groupLink: ${ orgRoot }/${ org.slug }/\norganization: ${ org.name }` : '' }
----
-${ content }
-`
+    `${ p.slug }/index.md`,
+    content,
+    {
+      title: (p.title || '').replaceAll('"', '&quot;'),
+      description: String(p.description || '').replaceAll('"', '&quot;'),
+      status: p.status,
+      date: p.date,
+      menu: false,
+      priority: 1,
+      index: 'monthly',
+      topic: postTopic?.[ p.topic_spotlight ]?.name || '',
+      topicSlug: postTopic?.[ p.topic_spotlight ]?.slug || '',
+      featured: p.feature_post,
+      imageHero,
+      imageThumb,
+      imageSocial,
+      imageAlt,
+      showDescription: p.show_description,
+      showRelated: p.show_related,
+      author: p.author,
+      source: p.source,
+      sourceURL: p.source_url,
+      tags,
+      groups,
+      groupLink: org ? `${ orgRoot }/${ org.slug }` : '',
+      organization: org ? org.name : ''
+    }
   );
+
 });
 
 // update topics if videos or podcasts exist

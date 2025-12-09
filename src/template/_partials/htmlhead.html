@@ -27,7 +27,7 @@ ${ data.imageHero ? `<link rel="preload" href="${ data.imageHero }" as="image">`
 <meta name="description" content="${ data.description || tacs.config.description }">
 <meta name="keywords" content="${ `${ data.isGroupIndex || data.isTagIndex || '' }, ${ ( data.tags || []).map(t => t.tag).join(', ') }, ${ tacs.config.keywords }`.replace(/(,\s*)+/g, ', ').replace(/^(,\s*)+|(,\s*)+$/, '') }">
 <meta name="author" content="${ data.author || tacs.config.author }">
-<link rel="canonical" href="${ tacs.config.canonical && data.source_url ? data.source_url : `${ tacs.config.domainProd }${ data.link }` }">
+<link rel="canonical" href="${ tacs.config.canonical && data.sourceURL ? data.sourceURL : `${ tacs.config.domainProd }${ data.link }` }">
 
 <!-- search -->
 <meta name="robots" content="${ tacs.config.isProd ? 'index,follow' : 'noindex,nofollow' }">
