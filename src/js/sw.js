@@ -29,14 +29,6 @@ self.addEventListener('activate', event => {
 });
 
 
-// fetch event
-self.addEventListener('fetch', event => {
-
-  console.log('service worker: fetch');
-
-});
-
-
 // clear old caches
 function cacheClearOld() {
 

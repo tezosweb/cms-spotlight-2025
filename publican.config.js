@@ -96,6 +96,12 @@ organization.forEach(org => {
 
 });
 
+// blocked common tags and organizations
+const tagBlock = 'tezos,xtz,tz,crypto,currency,coin,article,post,blog,item,piece,story,paper,essay'
+  .split(',')
+  .concat( organization.filter(o => o).map(o => o.name) )
+  .map(t => normalize(t));
+
 // add posts from CMS
 let videoActive = false, podcastActive = false, homeFeatured = null, rssCount = 0;
 const
@@ -122,20 +128,19 @@ cmsData.post.forEach(p => {
 
     // normalize tags
     tags = [
-      postTopic?.[ p.topic_spotlight ]?.slug || '',   // Spotlight topic
+      postTopic?.[ p.topic_spotlight ]?.name || '',   // Spotlight topic
       pType                                           // post type
     ]
       .concat(p.tags || [])                           // tags
       .map(t => t.replace(/\s+/g, ' ').trim())
-      .filter(t => t &&
-      t.toLowerCase() !== 'tezos' &&
-      t.toLowerCase() !== 'article'
-      )
+      .filter(t => t && !tagBlock.includes( normalize(t) ))
       .map(t => {
         const nt = normalize(t);
         if (!tagMap.has(nt)) tagMap.set(nt, t);
         return tagMap.get(nt);
       });
+
+    tags = [ ...new Set(tags) ];
 
     // add to groups
     if (p.feature_post) {

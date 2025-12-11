@@ -8,7 +8,7 @@ ${ tacs.group.get('featured')?.slice(0,1).map( p => `
   <article class="featured highlight"><a href="${ p.link }">
 
     <div>
-      ${ p.imageThumb ? `<img src="${ p.imageThumb }"${ data.imageAlt ? ` alt="${ p.imageAlt }"` : '' } loading="eager">` : '<figure><svg class="spotlight"><use xlink:href="#spotlightlogo"></use></svg></figure>' }
+      ${ p.imageThumb ? `<img src="${ p.imageThumb }"${ data.imageAlt ? ` alt="${ p.imageAlt }"` : '' } loading="eager" fetchpriority="high">` : '<figure><svg class="spotlight"><use xlink:href="#spotlightlogo"></use></svg></figure>' }
 
       <p class="topic">
         ${ p.featured ? '<span class="featured">Featured</span>' : '' }

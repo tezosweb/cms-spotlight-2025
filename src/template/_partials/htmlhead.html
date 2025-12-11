@@ -11,7 +11,7 @@ default-src 'none';
 img-src 'self' data: i.ytimg.com${ tacs.config.GTMID ? ' https://*.googletagmanager.com https://*.google-analytics.com' : ''} ${ tacs.config.cspImage };
 font-src 'self';
 style-src 'self' 'sha256-b4EJa4w89jtLvjxsBloYaCfwO1Xltuqrcz89Gtfj77U=';
-script-src 'self' 'sha256-OM0hjhCFzKhe37rKuW7480xLoDyRIzyLMKCvzoH6tGU='${ tacs.config.GTMID ? ' https://*.googletagmanager.com' : ''}${ tacs.config.PostHog.key ? ' https://*.posthog.com/' : ''};
+script-src 'self' 'sha256-OM0hjhCFzKhe37rKuW7480xLoDyRIzyLMKCvzoH6tGU='${ tacs.config.GTMID ? ' \'sha256-j1zBaqc4funhhPftI2LlDBoQ91mWsx9HrdDmGXdI/4I=\' https://*.googletagmanager.com' : ''}${ tacs.config.PostHog.key ? ' https://*.posthog.com/' : ''};
 worker-src 'self' blob: data:;
 connect-src 'self'${ tacs.config.GTMID ? ' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com' : ''}${ tacs.config.PostHog.key ? ' https://*.posthog.com/' : ''};
 manifest-src 'self';
