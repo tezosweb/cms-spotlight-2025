@@ -220,8 +220,8 @@ cmsData.post.forEach(p => {
 });
 
 // update topics if videos or podcasts exist
-if (videoActive) postTopic.push({ ...videoActive, show: true });
-if (podcastActive) postTopic.push({ ...podcastActive, show: true });
+// if (videoActive) postTopic.push({ ...videoActive, show: true });
+// if (podcastActive) postTopic.push({ ...podcastActive, show: true });
 
 // pass-through files
 publican.config.passThrough.add({ from: './src/media/favicon/', to: './media/favicon/' });

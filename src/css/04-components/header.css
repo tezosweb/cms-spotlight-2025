@@ -45,7 +45,8 @@ label[for="menu-open"] {
   inset: 100% 0 auto 0;
   text-align: center;
   background-color: var(--color-back0);
-  border-radius: 0 0 var(--radius2) var(--radius2);
+  margin-block-start: 1em;
+  border-radius: var(--radius2);
   border: 1px solid var(--color-back2);
   box-shadow: 0 4px 5px var(--color-shad2);
   overflow-y: auto;
@@ -138,6 +139,7 @@ label[for="menu-open"] {
     align-content: center;
     gap: 2em;
     overflow: visible;
+    margin-block-start: 0;
     background-color: transparent;
     border: 0 none;
     box-shadow: none;
