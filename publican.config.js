@@ -228,11 +228,17 @@ publican.config.passThrough.add({ from: './src/media/favicon/', to: './media/fav
 publican.config.passThrough.add({ from: './src/media/fonts/', to: './media/fonts/' });
 publican.config.passThrough.add({ from: './src/media/static/', to: './media/static/' });
 
+// processRenderStart hook: generate site inline scripts and CSP hashes
+publican.config.processRenderStart.add( fnHooks.renderstartInlineScripts );
+
 // processRenderStart hook: create tacs.tagScore Map
 publican.config.processRenderStart.add( fnHooks.renderstartTagScore );
 
 // processPreRender hook: determine related posts
 publican.config.processPreRender.add( fnHooks.prerenderRelated );
+
+// processPreRender hook: generate page inline scripts and CSP hashes
+publican.config.processPreRender.add( fnHooks.prerenderInlineScripts );
 
 // processPostRender hook: add <meta> tags
 publican.config.processPostRender.add( fnHooks.postrenderMeta );
