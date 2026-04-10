@@ -3,9 +3,9 @@ body.review::before {
 
   position: fixed;
   display: block;
-  inline-size: 100vw;
-  block-size: 100vh;
-  line-height: 100vh;
+  inline-size: 100vi;
+  block-size: 100vb;
+  line-height: 100vb;
   content: 'DRAFT';
   font-size: 20vmin;
   font-weight: bold;

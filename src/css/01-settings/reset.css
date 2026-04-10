@@ -56,7 +56,7 @@ nav, summary, label {
 }
 
 :target {
-  scroll-margin-top: 1.5em;
+  scroll-margin-block-start: 1.5em;
 }
 
 /* web components */

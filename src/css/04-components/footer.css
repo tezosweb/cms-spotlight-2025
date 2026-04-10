@@ -1,7 +1,7 @@
 footer {
 
   position: sticky;
-  inset-block-start: 100vh;
+  inset-block-start: 100vb;
 
   font-size: var(--fsize--2);
   display: grid;

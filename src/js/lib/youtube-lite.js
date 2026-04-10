@@ -33,25 +33,25 @@ class YouTubeLite extends HTMLElement {
 
     switch (property) {
 
-      // video defined
-      case 'video':
-        this.video = encodeURIComponent(this.video);
-        this.url = url + this.video + '?';
-        this.placeholder = `https://i.ytimg.com/vi/${ this.video }/hqdefault.jpg`;
-        this.loadPlaceholder();
-        this.loadVideo();
-        break;
+    // video defined
+    case 'video':
+      this.video = encodeURIComponent(this.video);
+      this.url = url + this.video + '?';
+      this.placeholder = `https://i.ytimg.com/vi/${ this.video }/hqdefault.jpg`;
+      this.loadPlaceholder();
+      this.loadVideo();
+      break;
 
       // playlist defined
-      case 'playlist':
-        this.url = url + 'videoseries?list=' + encodeURIComponent(this.playlist) + '&';
-        this.loadVideo();
-        break;
+    case 'playlist':
+      this.url = url + 'videoseries?list=' + encodeURIComponent(this.playlist) + '&';
+      this.loadVideo();
+      break;
 
       // placeholder defined
-      case 'placeholder':
-        this.loadPlaceholder();
-        break;
+    case 'placeholder':
+      this.loadPlaceholder();
+      break;
 
     }
 

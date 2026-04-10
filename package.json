@@ -33,7 +33,7 @@
     "static site"
   ],
   "dependencies": {
-    "esbuild": "0.27.3",
+    "esbuild": "0.28.0",
     "image-meta": "0.2.2",
     "publican": "0.12.1"
   },

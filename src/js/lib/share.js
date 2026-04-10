@@ -55,8 +55,8 @@ function shareHandler(e) {
   const
     sw = screen.availWidth || 1024,
     sh = screen.availHeight || 700,
-    pw = Math.min(cfgShare.width, (sw - cfgShare.margin * 2)),
-    ph = Math.min(cfgShare.height, (sh - cfgShare.margin * 2)),
+    pw = Math.min(cfgShare.width, (sw - (cfgShare.margin * 2))),
+    ph = Math.min(cfgShare.height, (sh - (cfgShare.margin * 2))),
     px = Math.floor((sw - pw) / 2),
     py = Math.floor((sh - ph) / 2);
 

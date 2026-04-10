@@ -3,7 +3,7 @@
   padding-block-end: 0.5rem;
   margin-block-start: 1rem;
   margin-block-end: 1.5rem;
-  overflow-x: auto;
+  overflow-inline: auto;
 }
 
 table {
