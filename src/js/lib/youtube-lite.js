@@ -42,13 +42,13 @@ class YouTubeLite extends HTMLElement {
       this.loadVideo();
       break;
 
-      // playlist defined
+    // playlist defined
     case 'playlist':
       this.url = url + 'videoseries?list=' + encodeURIComponent(this.playlist) + '&';
       this.loadVideo();
       break;
 
-      // placeholder defined
+    // placeholder defined
     case 'placeholder':
       this.loadPlaceholder();
       break;

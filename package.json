@@ -33,11 +33,14 @@
     "static site"
   ],
   "dependencies": {
-    "esbuild": "0.28.0",
+    "esbuild": "0.28.1",
     "image-meta": "0.2.2",
-    "publican": "0.12.1"
+    "publican": "0.12.2"
   },
   "devDependencies": {
-    "livelocalhost": "1.2.5"
+    "livelocalhost": "1.2.7"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
   }
 }
